@@ -51,7 +51,7 @@ li.menu {
 	width: 19%;
 	display: inline;
 	float: left;
-	padding: 5px;
+	padding: 0.4%;
 	border: 1px solid black;
 	margin: 3px solid black;
 }
@@ -66,6 +66,7 @@ li#menu2 {
 
 li.submenu {
 	text-align: center;
+	position: relative;
 	width: 19%;
 	display: block;
 	padding: 5px;
@@ -73,19 +74,25 @@ li.submenu {
 	margin: 0;
 }
 
-div {
+main {
+	width: 75%;
 	float: left;
+	display: inline-block;
+}
+
+div {
 	margin: 20px;
 	padding: 20px;
 	border: 20px;
-	display: inline;
+	display: inline-block;
 }
 
 aside {
-	display: inline-block;
-	float: right;
+	width: 20%;
+	float: left;
 	padding: 10px;
 	border: 1px solid black;
+	margin-top: 20px;
 }
 
 
