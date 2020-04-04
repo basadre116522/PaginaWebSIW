@@ -1,0 +1,56 @@
+body {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+@font-face {
+	font-family: 'Crimes Times Roman';
+	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
+}
+
+h1 {
+	font-family: 'Crimes Times Roman';
+	font-size: 40px;
+	display: inline-block;
+}
+
+button {
+	background-color: gray;
+	padding: 5px;
+	margin: 20px;
+	display: inline-block;
+	border-radius: 5px 5px 5px 5px;
+	border: 0px solid #000000;
+}
+
+#fondo-portada {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+nav {
+
+}
+
+ul#menu {
+
+}
+
+ul#submenu {
+
+}
+
+dis {
+
+}
+
+aside {
+
+}
+
+
+
+
