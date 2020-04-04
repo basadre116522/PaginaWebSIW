@@ -31,24 +31,61 @@ button {
 	border: 0;
 }
 
-nav {
+nav.horizontal-menu {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
 
 }
 
 ul#menu {
-
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
 }
 
-ul#submenu {
-
+li.menu {
+	text-align: center;
+	width: 19%;
+	display: inline;
+	float: left;
+	padding: 5px;
+	border: 1px solid black;
+	margin: 3px solid black;
 }
 
-dis {
+li#menu2 {
+	
+}
 
+#submenu {
+	display: none;
+}
+
+li.submenu {
+	text-align: center;
+	width: 19%;
+	display: block;
+	padding: 5px;
+	border: 0;
+	margin: 0;
+}
+
+div {
+	float: left;
+	margin: 20px;
+	padding: 20px;
+	border: 20px;
+	display: inline;
 }
 
 aside {
-
+	display: inline-block;
+	float: right;
+	padding: 10px;
+	border: 1px solid black;
 }
 
 
