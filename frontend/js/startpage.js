@@ -9,3 +9,7 @@ function ocultar() {
 		document.getElementById('submenu').style.display = 'none';
 	}
 }
+
+function seleccionado(id) {
+	
+}

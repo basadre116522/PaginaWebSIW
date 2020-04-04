@@ -7,29 +7,31 @@
 			<script type="text/javascript" src="../js/startpage.js"></script>
 	</head>
 	<!--<body background="https://curiosoando.com/wp-content/uploads/2015/05/cielo_azul.jpg">-->
-	<body>
+	<body background="../imagenes/fondo7.jpg">
 		<h1>Animales Fantasticos y como adoptarlos</h1>
-		<button typpe="button">Iniciar Sesión</button>
-		<button typpe="button">Registrarse</button>
-		<img id="fondo-portada" src="../imagenes/granja2.png">
+		<div id="botones">
+			<button typpe="button">Iniciar Sesion</button>
+			<button typpe="button">Registrarse</button>
+		</div>
+		<img id="fondo-portada" src="../imagenes/buckbeak.png">
 		<nav class="horizontal-menu">
 			<ul id="menu" class="menu">
-				<li id="menu1" class="menu"><a href="./startpage.html">Inicio</a></li>
-				<li id="menu2" class="menu" onmouseover="desplegar()" onmouseout="ocultar()"><a href="./animales.html">Animales</a>
+				<a href="./startpage.html"><li id="menu1" class="menu" onmouseover=seleccionado(this.id)>Inicio</li></a>
+				<a href="./animales.html"><li id="menu2" class="menu" onmouseover="desplegar()" onmouseout="ocultar()">Animales
 					<ul id="submenu" class="submenu">
-						<li id="submenu1" class="submenu">Dragones</li>
-						<li id="submenu2" class="submenu">Phoenix</li>
-						<li id="submenu3" class="submenu">Unicornios</li>
-						<li id="submenu4" class="submenu">Hipogrifos</li>
+						<li id="submenu1" class="submenu" onmouseover=seleccionado(this.id)>Dragones</li>
+						<li id="submenu2" class="submenu" onmouseover=seleccionado(this.id)>Phoenix</li>
+						<li id="submenu3" class="submenu" onmouseover=seleccionado(this.id)>Unicornios</li>
+						<li id="submenu4" class="submenu" onmouseover=seleccionado(this.id)>Hipogrifos</li>
 					</ul>
-				</li>
-				<li id="menu3" class="menu"><a href="./blog.html">Blog</a></li>
-				<li id="menu4" class="menu"><a href="./conocenos.html">Conócenos</a></li>
-				<li id="menu5" class="menu"><a href="./nosayudas.html">¿Nos Ayudas?</a></li>
+				</li></a>
+				<a href="./blog.html"><li id="menu3" class="menu" onmouseover=seleccionado(this.id)>Blog</li></a>
+				<a href="./conocenos.html"><li id="menu4" class="menu" onmouseover=seleccionado(this.id)>Conócenos</li></a>
+				<a href="./nosayudas.html"><li id="menu5" class="menu" onmouseover=seleccionado(this.id)>¿Nos Ayudas?</li></a>
 			</ul>
 		</nav>
 		<main>
-			<div>
+			<div id="quienessomos">
 				<h2>Quiénes Somos</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
@@ -43,7 +45,7 @@
 				Sábados 10:00 - 14:00</br>
 				Domingos CERRADO
 			</p>
-			<p>Email agencia: afica@mail.com</p>
+			<p>Email agencia: afyca@mail.com</p>
 		</aside>
 
 	</body>
