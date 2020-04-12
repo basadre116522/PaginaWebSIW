@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminAFYCA</title>
+</head>
+<body>
+<div>
+      ##menu##
+    </div>
+  </aside>
+  	  <div>
+		<h3>Modificar animal</h3>
+	  </div>
+	  <div>
+	  <form role="form" method="post" action="index.php">
+		  <div>
+		    <label for="nombre">Nombre</label>
+		    <input type="text" id="nombre" placeholder="Introduce el nombre" name="nombre" required value="##nombre##"><br>
+		    <label for="edad">Edad</label>
+		    <input type="number" id="edad" placeholder="años" name="edad" step="0.5" min="0" max="100" required value="##edad##"><br>
+		    <label for="genero">Género</label><br>
+		    <input type="radio" id="macho" name="genero" value="macho" ##macho##>
+			<label for="macho">Macho</label><br>
+			<input type="radio" id="hembra" name="genero" value="hembra" ##hembra##>
+			<label for="hembra">Hembra</label><br>
+			<input type="radio" id="otro" name="genero" value="otro" ##otro##>
+			<label for="otro">Otro</label> <br>
+		    <label for="fechaentrada">Fecha Entrada</label>
+		    <input type="date" id="fechaentrada" name="fechaentrada" min="2020-01-01" required value="##fechaentrada##"><br>
+		    <label for="descripcion">Descripción</label>
+		    <input type="text" class="form-control" id="descripcion" placeholder="Descripción del animal" name="descripcion" rows="3" required value="##descripcion##"><br>
+		    <label for="raza">Raza</label>
+			<select name="idraza" id="raza" class="form-control">
+				<option value="0">Seleccione una raza</option>
+				##fila##
+				<option value="##idraza##" ##seleccionada##>##raza##</option>
+				##fila##
+			</select> <br>
+		    <input type="hidden" name="accion" value="bymanimal">
+		    <input type="hidden" name="id" value="3">
+            <input type="hidden" name="idanimal" value="##idanimal##">
+		  </div>
+		  <div>
+		    <button type="submit">Modificar</button>
+		  </div>
+	  </form>
+	</div>
+</body>
+</html>
