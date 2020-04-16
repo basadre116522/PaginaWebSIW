@@ -361,5 +361,30 @@
 			}
 		}
 	}
+
+	function vmostrarlogin() {
+		echo file_get_contents("login.html");
+	}
+	
+	function vmostrarresultadologin($resultado) {
+
+			$cadena = file_get_contents("login.html");
+			$cadena = vmontarmenu($cadena);
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				break; 
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+				break; 
+		}	
+		
+	}
 	
 ?>

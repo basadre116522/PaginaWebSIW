@@ -1,0 +1,18 @@
+.divmenu {
+	display: inline-block;
+	float: left;
+	padding: 10px;
+	margin: 5px;
+	border: 1px solid black;
+}
+
+main {
+	display: inline-block;
+	float: left;
+	padding: 20px;
+}
+
+form {
+	padding: 20px;
+}
+

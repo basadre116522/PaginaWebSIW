@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminAFYCA</title>
+</head>
+<body>
+  	  <div>
+		<h3>Formulario de acceso</h3>
+	  </div>
+	  <div>
+	  <form method="post" action="index.php">
+			<label for="usuario">Usuario</label>
+			<input type="text" id="usuario" name="usuario" required><br>
+
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required><br>
+
+			<input type="hidden" name="accion" value="login">
+			<input type="hidden" name="id" value="2">
+		  
+			<button type="submit">Acceder</button>
+		</form>
+	</div>
+</body>
+</html>

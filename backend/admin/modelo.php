@@ -242,6 +242,57 @@
 		}
 	}
 
+	function mvalidarlogin() {
+		$con = conexionbasedatos();
+
+		$usuario = $_POST["usuario"];
+		$password = md5($_POST["password"]);
+
+		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				if ($password == $datos["password"]) {
+					$_SESSION["usuario"] = $usuario;
+					$_SESSION["password"] = $password;
+					return 1; // todo ok
+				} else {
+					return -3; //se ha introducido mal la contraseña
+				}
+			} else {
+				return -2; //no existe usuario
+			}
+		} else {
+			return -1;
+		}
+	}
+
+
+	function mcomprobarusuariosesion() {
+		$con = conexionbasedatos();
+
+		$usuario = $_SESSION["usuario"];
+		$password = $_SESSION["password"];
+
+		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				if ($password == $datos["password"]) {
+					return 1; // todo ok
+				} else {
+					return -3; //se ha introducido mal la contraseña
+				}
+			} else {
+				return -2; //no existe usuario
+			}
+		} else {
+			return -1;
+		}
+		
+	}
+
+
 
 
 

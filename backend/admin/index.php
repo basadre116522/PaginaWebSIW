@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	include "vista.php";
 	include "modelo.php";
 
@@ -17,79 +19,101 @@
 		$id = $_POST["id"];
 	}
 
-	if ($accion == "altaraza") {
+	//Comprobamos que acción está definida
+	if (!isset($accion)) {
+		$accion = "login";
+		$id = 1;
+	}	
+
+	if ($accion == "login") {
 		switch ($id) {
 			case '1':
-				// muestra contenido de "altaraza.html" y monta el menú
-				vmostraraltaraza(); 
+				vmostrarlogin();
 				break;
 			case '2':
-				// malmacenarraza(): recoge la info de la raza, comprueba si ya existe en la base de datos, y si no está, la almacena
-				// vmostrarresultadoaltaraza($resultado): devuelve el resultado obtenido (si se ha efectuado el alta correctamente o no, o si ya existía)
-				vmostrarresultadoaltaraza(malmacenarraza()); 
+				vmostrarresultadologin(mvalidarlogin());
 				break;
 		}
-	}
+	} else {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			if ($accion == "altaraza") {
+				switch ($id) {
+					case '1':
+						// muestra contenido de "altaraza.html" y monta el menú
+						vmostraraltaraza(); 
+						break;
+					case '2':
+						// malmacenarraza(): recoge la info de la raza, comprueba si ya existe en la base de datos, y si no está, la almacena
+						// vmostrarresultadoaltaraza($resultado): devuelve el resultado obtenido (si se ha efectuado el alta correctamente o no, o si ya existía)
+						vmostrarresultadoaltaraza(malmacenarraza()); 
+						break;
+				}
+			}
 
-	if ($accion == "bymraza") {
-		switch ($id) {
-			case '1': 
-				// mlistadoraza(): a través de una query, consulta el listado de razas almacenadas en la base de datos
-				// vmostrarlistadobymrazas(): recoge contenido de "bymrazas.html", monta el menú, trocea las filas, se realiza proceso de montaje
-				vmostrarlistadobymrazas(mlistadorazas());
-				break;
-			case '2': 
-				vmostrarmodificarraza(mdatosraza());
-				break;
-			case '3': 
-				vresultadomodificarraza(mmodificarraza());
-				break;
-			case '4': 
-				vmostrareliminarraza(mdatosraza());
-				break;
-			case '5': 
-				vmostrarresultadoeliminarraza(mvalidareliminarraza());
-				break;
+			if ($accion == "bymraza") {
+				switch ($id) {
+					case '1': 
+						// mlistadoraza(): a través de una query, consulta el listado de razas almacenadas en la base de datos
+						// vmostrarlistadobymrazas(): recoge contenido de "bymrazas.html", monta el menú, trocea las filas, se realiza proceso de montaje
+						vmostrarlistadobymrazas(mlistadorazas());
+						break;
+					case '2': 
+						vmostrarmodificarraza(mdatosraza());
+						break;
+					case '3': 
+						vresultadomodificarraza(mmodificarraza());
+						break;
+					case '4': 
+						vmostrareliminarraza(mdatosraza());
+						break;
+					case '5': 
+						vmostrarresultadoeliminarraza(mvalidareliminarraza());
+						break;
+				}
+			}
+
+			if ($accion == "altaanimal") {
+				switch ($id) {
+					case '1': 
+						vmostraraltaanimal(mlistadorazas());
+						break;
+					case '2': 
+						vmostrarresultadoaltaanimal(mvalidaraltaanimal());
+						break;
+				}
+			}
+
+			if ($accion == "listadoanimal") {
+				switch ($id) {
+					case '1': 
+						vmostrarlistadoanimales(mlistadoanimales());
+						break;
+				}
+			}
+
+			if ($accion == "bymanimal") {
+				switch ($id) {
+					case '1': 
+						vmostrarlistadoanimalesbym(mlistadoanimales());
+						break;
+					case '2': 
+						vmostrarmodificaranimal(mdatosanimal(), mlistadorazas());
+						break;
+					case '3': 
+						vmostrarresultadomodificaranimal(mvalidarmodificaranimal());
+						break;
+					case '4': 
+						vmostrareliminaranimal(mdatosanimalconraza());
+						break;
+					case '5': 
+						vmostrarresultadoeliminaranimal(meliminaranimal());
+						break;
+				}		
+			}
+		} else {
+			header("Location: index.php?accion=login&id=1");
 		}
-	}
-
-	if ($accion == "altaanimal") {
-		switch ($id) {
-			case '1': 
-				vmostraraltaanimal(mlistadorazas());
-				break;
-			case '2': 
-				vmostrarresultadoaltaanimal(mvalidaraltaanimal());
-				break;
-		}
-	}
-
-	if ($accion == "listadoanimal") {
-		switch ($id) {
-			case '1': 
-				vmostrarlistadoanimales(mlistadoanimales());
-				break;
-		}
-	}
-
-	if ($accion == "bymanimal") {
-		switch ($id) {
-			case '1': 
-				vmostrarlistadoanimalesbym(mlistadoanimales());
-				break;
-			case '2': 
-				vmostrarmodificaranimal(mdatosanimal(), mlistadorazas());
-				break;
-			case '3': 
-				vmostrarresultadomodificaranimal(mvalidarmodificaranimal());
-				break;
-			case '4': 
-				vmostrareliminaranimal(mdatosanimalconraza());
-				break;
-			case '5': 
-				vmostrarresultadoeliminaranimal(meliminaranimal());
-				break;
-		}		
 	}
 	
 
