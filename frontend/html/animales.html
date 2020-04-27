@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animales</title>
+  	<link rel="stylesheet" href="../css/animales.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+
+		function cargaranimales(idraza,pagina) {
+			$.ajax({
+				url: "index.php?accion=listado&id=1&pagina=" + pagina + "&idraza=" + idraza,
+				cache: false,
+				dataType: "json",
+				success: function(result) {
+					$("#menu").html(result[2]);
+					$("#animales").html(result[1]);
+					$("#paginacion").html(result[0]);
+				},
+				error: function (request, status, error) {
+			        alert(request.responseText);
+			    }
+			});
+		}
+
+	</script>
+</head>
+<body onload="cargaranimales('',1)">
+	<h2>página de animales</h2><br><br>
+	<aside id="menu"></aside>
+	<div id="animales">Aquí va la tabla de animales</div>
+	<div id="paginacion">paginación</div>
+</body>
+</html>
