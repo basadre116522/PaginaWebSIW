@@ -1,7 +1,19 @@
 <?php
 
+	function vmostrarstartpage() {
+		$cadena = file_get_contents("../html/startpage.html");
+		echo vmontarcabecera($cadena);
+	}
+
 	function vmostrarpaginaanimales() {
-		echo file_get_contents("../html/animales.html");
+		$cadena = file_get_contents("../html/animales.html");
+		echo vmontarcabecera($cadena);
+	}
+
+	function vmontarcabecera($cadena) {
+		$cabecera = file_get_contents("../html/cabecera.html");
+		$cadena = str_replace("##cabecera##", $cabecera, $cadena);
+		return $cadena;
 	}
 
 	function vmontarmenu($resultado) {
@@ -18,10 +30,6 @@
 		}
 
 		return $trozos[0] . $cuerpo . $trozos[2];
-/*
-		$animales = file_get_contents("../html/animales.html");
-		$cadena = str_replace("##menu##", $animales, $cadena);
-		 $cadena;*/
 
 	}
 

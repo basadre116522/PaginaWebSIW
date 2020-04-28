@@ -1,3 +1,25 @@
+@font-face {
+	font-family: 'Crimes Times Roman';
+	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-family: Bradley Hand, cursive;
+}
+
+h2 {
+	padding: 20px;
+	clear: both;
+	font-family: Crimes Times Roman;
+}
+
+h3 {
+	font-family: Crimes Times Roman;
+}
+
 #menu {
 	float: left;
 	margin: 10px;
@@ -13,18 +35,20 @@
 }
 
 #menunav ul li{
-	padding: 5px;
-	margin: 0px;
 	border: 1px solid black;
+	display: block;
 }
 
 #menunav ul li a{
+	padding: 10px;
 	text-decoration: none;
+	display: block;
 }
 
 #animales {
 	float: left;
 	display: block;
+	width: 60%;
 }
 
 #unanimal {
@@ -32,9 +56,101 @@
 	padding: 20px;
 	margin: 20px;
 	border: 1px solid black;
+	width: 100%;
 }
 
 #paginacion {
 	text-align: center;
 	clear: both;
+	margin-bottom: 100px;
+}
+
+
+
+h1 {
+	font-size: 40px;
+	display: inline-block;
+	margin-right: 150px;
+	margin-left: 10px;
+	font-family: Crimes Times Roman;
+}
+
+#botones {
+	display: inline-block;
+	float: right;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	margin-top: 10px;
+	margin-right: 50px;
+}
+
+button {
+	background-color: #809629;
+	padding: 10px;
+	margin: 20px;
+	margin-right: 0;
+	margin-left: 0;
+	display: inline-block;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #000000;
+	font-family: 'Crimes Times Roman';
+}
+
+#fondo-portada {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+nav.horizontal-menu {
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin: -4px;
+	border: 0;
+}
+
+ul#menuprincipal {
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	justify-content: center;
+	color: black;
+}
+
+li.menuprincipal {
+	background-color: #809629;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Crimes Times Roman';
+	width: 17.4%;
+	display: inline;
+	float: left;
+	padding: 5px;
+	border-top: 0;
+	margin: 0;
+	color: black;
+}
+
+
+#submenu {
+	width: 17.3%;
+	position: absolute;
+	display: none;
+}
+
+li.submenu {
+	background-color: #809629;
+	text-align: left;
+	color: black;
+	width: 95%;
+	display: block;
+	padding: 5px;
+	border: 0;
+	margin: 0;
+	margin-left: -39px;
 }

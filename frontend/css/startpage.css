@@ -54,7 +54,7 @@ nav.horizontal-menu {
 	border: 0;
 }
 
-ul#menu {
+ul#menuprincipal {
 	width: 100%;
 	padding: 0;
 	margin: 0;
@@ -63,7 +63,7 @@ ul#menu {
 	color: black;
 }
 
-li.menu {
+li.menuprincipal {
 	background-color: #809629;
 	text-align: center;
 	font-size: 15px;

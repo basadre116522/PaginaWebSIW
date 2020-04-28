@@ -28,12 +28,16 @@
 	}
 
 	if (strlen($accion) == 0) {
-		vmostrarpaginaanimales();
+		vmostrarstartpage();
 	} elseif ($accion == "listado") {
 		switch ($id) {
 			case 1 :
 				vmostrardatos(mcargaranimales(),mmontarmenu());
 				break;
+			default:
+				vmostrarpaginaanimales();
+				break;
+
 		}	
 	}
 
