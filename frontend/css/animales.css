@@ -1,3 +1,40 @@
 #menu {
+	float: left;
+	margin: 10px;
+}
+
+#menunav {
+	padding: 10px;
+	margin: 10px;
+}
+
+#menunav ul {
+	list-style-type: none;
+}
+
+#menunav ul li{
+	padding: 5px;
+	margin: 0px;
+	border: 1px solid black;
+}
+
+#menunav ul li a{
+	text-decoration: none;
+}
+
+#animales {
+	float: left;
 	display: block;
+}
+
+#unanimal {
+	display: block;
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid black;
+}
+
+#paginacion {
+	text-align: center;
+	clear: both;
 }
