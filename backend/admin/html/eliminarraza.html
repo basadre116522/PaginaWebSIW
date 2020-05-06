@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>AdminAFYCA</title>
-  <link rel="stylesheet" href="./css/modificarraza.css">
+  <link rel="stylesheet" href="../css/eliminarraza.css">
 </head>
 <body>
 	<div id="divmenu" class="divmenu">
@@ -11,19 +11,18 @@
     </div>
   <main>
   	  <div>
-		<h3>Modificar raza</h3>
+		<h3>Eliminar raza</h3>
 	  </div>
 	  <div>
 	  <form role="form" method="post" action="index.php">
 		  <div class="form-group">
-		    <label for="raza">Raza</label>
-		    <input type="text" class="form-control" id="raza" placeholder="Introduce la raza" name="raza" required value="##raza##"><br><br>
+		    <label for="raza">Raza: ##raza##</label><br>
 		    <input type="hidden" name="accion" value="bymraza">
-		    <input type="hidden" name="id" value="3">
-			<input type="hidden" name="idraza" value="##idraza##">
+		    <input type="hidden" name="id" value="5">
+            <input type="hidden" name="idraza" value="##idraza##">
 		  </div>
 		  <div>
-		    <button type="submit">Modificar</button>
+		    <button type="submit">Eliminar</button>
 		  </div>
 	  </form>
 	</div>

@@ -5,8 +5,12 @@
 	<title>Animales</title>
   	<link rel="stylesheet" href="../css/animales.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/animales.js"></script>
 	<script>
-
+		function cargarunanimal() {
+			var idraza = getParameterById('idraza'); alert(idraza);
+			cargaranimales(idraza, 1);
+		}
 		function cargaranimales(idraza,pagina) {
 			$.ajax({
 				url: "index.php?accion=listado&id=1&pagina=" + pagina + "&idraza=" + idraza,
@@ -22,7 +26,6 @@
 			    }
 			});
 		}
-
 	</script>
 </head>
 <body onload="cargaranimales('',1)">

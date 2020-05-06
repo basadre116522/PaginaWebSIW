@@ -21,21 +21,23 @@
 
 	if (isset($_GET["idraza"])) {
 		$idraza = $_GET["idraza"];
-	} elseif (isset($_POST["id"])) {
+	} elseif (isset($_POST["idraza"])) {
 		$idraza = $_POST["idraza"];
 	} else {
 		$idraza = "";
 	}
 
 	if (strlen($accion) == 0) {
-		vmostrarstartpage();
-	} elseif ($accion == "listado") {
+		vmostrarstartpage(mcargarrazas());
+	} 
+
+	if ($accion == "listado") {
 		switch ($id) {
 			case 1 :
 				vmostrardatos(mcargaranimales(),mmontarmenu());
 				break;
 			default:
-				vmostrarpaginaanimales();
+				vmostrarpaginaanimales(mcargarrazas());
 				break;
 
 		}	

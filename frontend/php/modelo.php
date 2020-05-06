@@ -17,17 +17,39 @@
 		}
 	}
 
+	function mcargarrazas() {
+		$con = conexionbasedatos();
+
+		$consulta = "select * from razas";
+
+		if ($resultado = $con->query($consulta)) {
+				return $resultado;
+			} else {
+				return -1;
+			}
+	}
+
 	function mcargaranimales() {
 		$con = conexionbasedatos();
 
 		if (isset($_GET["idraza"])) {
 			$idraza = $_GET["idraza"];
-		} elseif (isset($_POST["id"])) {
+		} elseif (isset($_POST["idraza"])) {
 			$idraza = $_POST["idraza"];
 		} else {
 			$idraza = "";
 		}
-		$pagina = $_GET["pagina"];
+
+		if (isset($_GET["pagina"])) {
+			$pagina = $_GET["pagina"];
+		} elseif (isset($_POST["pagina"])) {
+			$pagina = $_POST["pagina"];
+		} else {
+			$pagina = 1;
+		}
+
+		$numerototal = 0;
+		$res = array();
 
 		if (strlen($idraza) == 0){
 
@@ -67,9 +89,9 @@
 		}
 
 		if ($resultado = $con->query($consulta)) {
-			$res[0] = $numerototal;
-			$res[1] = $resultado;
-			$res[2] = $idraza;
+			$res[0] = $numerototal; // número total de páginas
+			$res[1] = $resultado; // contenido de la consulta
+			$res[2] = $idraza; // código de la raza
  			return $res;
 		} else {
 			$res[0] = -1;

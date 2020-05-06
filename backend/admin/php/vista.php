@@ -1,7 +1,7 @@
 <?php
 	
 	function vmostrarmensaje($titulo, $subtitulo, $texto) {
-		$cadena = file_get_contents("mensaje.html");
+		$cadena = file_get_contents("../html/mensaje.html");
 		$cadena = vmontarmenu($cadena);
 		$cadena = str_replace("##titulo##", $titulo, $cadena);
 		$cadena = str_replace("##subtitulo##", $subtitulo, $cadena);
@@ -11,19 +11,19 @@
 
 
 	function vmontarmenu($cadena) {
-		$menu = file_get_contents("menu.html");
+		$menu = file_get_contents("../html/menu.html");
 		$cadena = str_replace("##menu##", $menu, $cadena);
 		return $cadena;
 	}
 
 	function vcargarinicio() {
-		$cadena = file_get_contents("starter.html");
+		$cadena = file_get_contents("../html/starter.html");
 		$cadena = vmontarmenu($cadena);
 		echo $cadena;
 	}
 
 	function vmostraraltaraza() {
-		$cadena = file_get_contents("altaraza.html");
+		$cadena = file_get_contents("../html/altaraza.html");
 		$cadena = vmontarmenu($cadena);
 		echo $cadena;		
 	}
@@ -52,7 +52,7 @@
 
 	function vmostrarlistadobymrazas($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("bymraza.html");
+			$cadena = file_get_contents("../html/bymraza.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$trozos = explode("##fila##", $cadena);
@@ -81,7 +81,7 @@
 	*******************************/
 	function vmostrarmodificarraza($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("modificarraza.html");
+			$cadena = file_get_contents("../html/modificarraza.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$datos = $resultado -> fetch_assoc();
@@ -126,7 +126,7 @@
 	*******************************/
 	function vmostrareliminarraza($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("eliminarraza.html");
+			$cadena = file_get_contents("../html/eliminarraza.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$datos = $resultado -> fetch_assoc();
@@ -159,7 +159,7 @@
 
 	function vmostraraltaanimal($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("altaanimal.html");
+			$cadena = file_get_contents("../html/altaanimal.html");
 			$cadena = vmontarmenu($cadena);
 
 			$trozos = explode("##fila##", $cadena);
@@ -200,7 +200,7 @@
 
 	function vmostrarlistadoanimalesbym($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("bymanimal.html");
+			$cadena = file_get_contents("../html/bymanimal.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$trozos = explode("##fila##", $cadena);
@@ -235,7 +235,7 @@
 			}
 		}
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("modificaranimal.html");
+			$cadena = file_get_contents("../html/modificaranimal.html");
 			$cadena = vmontarmenu($cadena);
 
 			$datos = $resultado->fetch_assoc();
@@ -305,7 +305,7 @@
 
 	function vmostrareliminaranimal($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("eliminaranimal.html");
+			$cadena = file_get_contents("../html/eliminaranimal.html");
 			$cadena = vmontarmenu($cadena);
 
 			$datos = $resultado->fetch_assoc();
@@ -337,7 +337,7 @@
 	
 	function vmostrarlistadoanimales($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("listadoanimales.html");
+			$cadena = file_get_contents("../html/listadoanimales.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$trozos = explode("##fila##", $cadena);
@@ -368,7 +368,7 @@
 	
 	function vmostrarresultadologin($resultado) {
 
-			$cadena = file_get_contents("login.html");
+			$cadena = file_get_contents("../html/login.html");
 			$cadena = vmontarmenu($cadena);
 		switch ($resultado) {
 			case '1':

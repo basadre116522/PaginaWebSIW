@@ -1,17 +1,29 @@
 <?php
 
-	function vmostrarstartpage() {
+	function vmostrarstartpage($listadorazas) {
 		$cadena = file_get_contents("../html/startpage.html");
-		echo vmontarcabecera($cadena);
+		echo vmontarcabecera($cadena, $listadorazas);
 	}
 
-	function vmostrarpaginaanimales() {
+	function vmostrarpaginaanimales($listadorazas) {
 		$cadena = file_get_contents("../html/animales.html");
-		echo vmontarcabecera($cadena);
+		echo vmontarcabecera($cadena, $listadorazas);
 	}
 
-	function vmontarcabecera($cadena) {
+	function vmontarcabecera($cadena, $listadorazas) {
 		$cabecera = file_get_contents("../html/cabecera.html");
+		$trozos = explode("##fila##", $cabecera);
+
+		$aux = "";
+		$cuerpo = "";
+		while ($datos = $listadorazas->fetch_assoc()) {
+			$aux = $trozos[1];
+			$aux = str_replace("##idraza##", $datos["idraza"], $aux);
+			$aux = str_replace("##raza##", $datos["raza"], $aux);
+			$cuerpo .= $aux;
+		}
+
+		$cabecera = $trozos[0] . $cuerpo . $trozos[2];
 		$cadena = str_replace("##cabecera##", $cabecera, $cadena);
 		return $cadena;
 	}
