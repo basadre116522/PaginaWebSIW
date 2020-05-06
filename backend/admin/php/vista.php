@@ -363,7 +363,7 @@
 	}
 
 	function vmostrarlogin() {
-		echo file_get_contents("login.html");
+		echo file_get_contents("../html/login.html");
 	}
 	
 	function vmostrarresultadologin($resultado) {
