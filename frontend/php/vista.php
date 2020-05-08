@@ -78,6 +78,9 @@
 				$aux = str_replace("##genero##", $datos["genero"], $aux);
 				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
 				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
+				$imagenes = mlistadoimagenesconlink($datos["idanimal"]);
+				$aux = str_replace("##imagen##", $imagenes, $aux);
+
 				$cuerpo .= $aux;
 			}
 

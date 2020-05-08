@@ -14,7 +14,7 @@
 		<h3>Modificar animal</h3>
 	  </div>
 	  <div>
-	  <form role="form" method="post" action="index.php">
+	  <form role="form" method="post" action="index.php" enctype="multipart/form-data" >
 		  <div>
 		    <label for="nombre">Nombre</label>
 		    <input type="text" id="nombre" placeholder="Introduce el nombre" name="nombre" required value="##nombre##"><br>
@@ -38,6 +38,15 @@
 				<option value="##idraza##" ##seleccionada##>##raza##</option>
 				##fila##
 			</select> <br>
+			<label for="e_imagenes">Eliminar imagenes</label>
+			<select name="e_imagenes" id="e_imagenes" class="form-control">
+				<option value="0">Selecione una imagen</option>
+				##fila2##
+				<option value="##imagen##" ##seleccionada## multiple="">##imagen##</option>
+				##fila2##
+			</select> <br>
+			<label for="a_imagenes">Añadir imagenes</label>
+			<input type="file" id="a_imagenes" name="a_imagenes[]" accept=".jpg,.png,.jpeg" multiple>
 		    <input type="hidden" name="accion" value="bymanimal">
 		    <input type="hidden" name="id" value="3">
             <input type="hidden" name="idanimal" value="##idanimal##">

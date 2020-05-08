@@ -15,7 +15,7 @@
 		<h3>Alta de animal</h3>
 	  </div>
 	  <div>
-	  <form role="form" method="post" action="index.php">
+	  <form role="form" method="post" enctype="multipart/form-data" action="index.php">
 		  <div>
 		    <label for="nombre">Nombre</label>
 		    <input type="text" id="nombre" placeholder="Introduce el nombre" name="nombre" required><br>
@@ -39,6 +39,9 @@
 				<option value="##idraza##">##raza##</option>
 				##fila##
 			</select> <br>
+			<label for="imagenes">Imagenes</label>
+			<input type="file" id="imagenes" name="imagenes[]" accept=".jpg,.png,.jpeg" multiple>
+			<br>
 		    <input type="hidden" name="accion" value="altaanimal">
 		    <input type="hidden" name="id" value="2">
 		  </div>

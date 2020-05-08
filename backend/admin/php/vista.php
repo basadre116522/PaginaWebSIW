@@ -215,6 +215,16 @@
 				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
 				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
 				$aux = str_replace("##raza##", $datos["raza"], $aux);
+				$imagenes_array = mlistadoimagenes($datos["idanimal"]);
+				$i = 0;
+				$dir= 'http://localhost/siw/PaginaWebSIW-master/backend/admin/imagenes';
+				foreach($imagenes_array as $img){
+					$target_path = $dir.'/'.$img;
+					$imagenes_array[$i] = "<a href='".$target_path."'>".$img."</a>";
+					$i++;
+				}
+				$imagenes = implode(" ", $imagenes_array);
+				$aux = str_replace("##imagenes##", $imagenes, $aux);
 				$cuerpo .= $aux;
 			}
 
@@ -257,10 +267,10 @@
 			$cadena = str_replace("##fechaentrada##", $datos["fechaentrada"], $cadena);
 			$cadena = str_replace("##descripcion##", $datos["descripcion"], $cadena);
 			$cadena = str_replace("##idanimal##", $datos["idanimal"], $cadena);
+			$idanimal = $datos["idanimal"];
 			$idraza = $datos["idraza"];
 
 			$trozos = explode("##fila##", $cadena);
-			
 			$aux ="";
 			$cuerpo ="";
 			while ($datos = $listadorazas->fetch_assoc()) {
@@ -276,9 +286,20 @@
 	
 				$cuerpo .= $aux;
 			}
+			$cadena = $trozos[0] . $cuerpo . $trozos[2];
 
+			$imagenes = mlistadoimagenes($idanimal);
+			$cuerpo = "";
+			$aux = "";
+			$trozos = explode("##fila2##", $cadena);
+			foreach($imagenes as $img){
+				$aux = $trozos[1];
+				$aux = str_replace("##imagen##", $img, $aux);
+				$cuerpo .= $aux;
+			}
 
 			echo $trozos[0] . $cuerpo . $trozos[2];
+			
 		} else {
 			if ($resultado == -1) {
 				vmostrarmensaje("Gestión de animales", "Baja y modificación de animal", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1123");
@@ -351,6 +372,17 @@
 				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
 				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
 				$aux = str_replace("##raza##", $datos["raza"], $aux);
+				$imagenes_array = mlistadoimagenes($datos["idanimal"]);
+				$i = 0;
+				$dir= 'http://localhost/siw/PaginaWebSIW-master/backend/admin/imagenes';
+				foreach($imagenes_array as $img){
+					$target_path = $dir.'/'.$img;
+					$imagenes_array[$i] = "<a href='".$target_path."'>".$img."</a>";
+					$i++;
+				}
+				$imagenes = implode(" ", $imagenes_array);
+				$aux = str_replace("##imagenes##", $imagenes, $aux);
+
 				$cuerpo .= $aux;
 			}
 
@@ -367,9 +399,9 @@
 	}
 	
 	function vmostrarresultadologin($resultado) {
-
-			$cadena = file_get_contents("../html/login.html");
-			$cadena = vmontarmenu($cadena);
+		// si da error hacer que te mande nuevo al login directamnete 
+		$cadena = file_get_contents("../html/login.html");
+		$cadena = vmontarmenu($cadena);
 		switch ($resultado) {
 			case '1':
 				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
