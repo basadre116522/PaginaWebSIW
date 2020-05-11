@@ -111,6 +111,42 @@
 						break;
 				}		
 			}
+
+			if ($accion == "listadomensajesrecibidos") {
+				switch ($id) {
+					case '1':
+						vmostrarlistadomensajesrecibidos(mlistadomensajesrecibidos());
+						break;
+				}
+			}
+
+			if ($accion == "listadomensajesenviados") {
+				switch ($id) {
+					case '1':
+						vmostrarlistadomensajesenviados(mlistadomensajesenviados());
+						break;
+				}
+			}
+			if ($accion == "redactarmensaje") {
+				switch ($id) {
+					case '1':
+						vmostrarredactarmensaje();
+						break;
+					case '2':
+						vmostrarresultadoredactarmensaje(malmacenarmensaje()); 
+						break;
+				}
+			}
+			if ($accion == "mostrarmensaje") {
+				switch ($id) {
+					case '1':
+						vmostrarmensajerecibido(mdatosmensaje());
+						break;
+					case '2':
+						vmostrarmensajeenviado(mdatosmensaje());
+					break;
+				}
+			}
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}

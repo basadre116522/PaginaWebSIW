@@ -399,8 +399,125 @@
 		
 	}
 
+	/******************************
+	Función encargada de coger listado de mensajes recibidos
+	Devuelve
+		Listado de mensajes
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mlistadomensajesrecibidos() {
+		$con = conexionbasedatos();
+
+		$usuario = $_SESSION["usuario"];
+		$consulta = "select idmensaje, animales.idanimal, usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from mensajes
+						join usuarios on mensajes.idusuario = usuarios.id 
+						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
+						left join animales on animales.idanimal = mensajes.idanimal
+						where usuariosadmin.usuario = '$usuario' and mensajes.recibido = 1
+						order by fecha, hora desc";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
+
+	/******************************
+	Función encargada de coger listado de mensajes enviados
+	Devuelve
+		Listado de mensajes
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mlistadomensajesenviados() {
+		$con = conexionbasedatos();
+
+		$usuario = $_SESSION["usuario"];
+		$consulta = "select idmensaje, animales.idanimal, usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from mensajes
+						join usuarios on mensajes.idusuario = usuarios.id 
+						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
+						left join animales on animales.idanimal = mensajes.idanimal
+						where usuariosadmin.usuario = '$usuario' and mensajes.recibido = 0
+						order by fecha, hora desc";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
+
+	/******************************
+	Función encargada de introducir un mensaje en la base de datos
+	Devuelve
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function malmacenarmensaje() {
+		$con = conexionbasedatos();
+		setlocale(LC_ALL,"es_ES");
+
+		$usuarioadmin = $_SESSION["usuario"];
+		$consulta = "select * from usuariosadmin where usuario ='$usuarioadmin'";
+
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				$idadmin = $datos["id"];
+				$destinatario = $_POST["destinatario"];
+				$consulta = "select * from usuarios where usuario ='$destinatario'";
+				if ($resultado = $con->query($consulta)) {
+					if ($datos = $resultado->fetch_assoc()) {
+						$idusuario = $datos["id"];
+						$mensaje = $_POST["mensaje"];
+						$asunto = $_POST["asunto"];
+						$hora = date('H:i:s');
+						$fecha = date('Y-m-d');
+						$consulta = "insert into mensajes (idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
+						VALUES ('$idusuario', '$mensaje', '$idadmin', '$asunto', '$fecha', '$hora', '0');";
+						echo $consulta;
+						if ($resultado = $con->query($consulta)) {
+							return 1;
+						} else {
+							return -1;
+						}
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} else {
+				return -1;
+			}
+		} else {
+			return -1;
+		}
 
 
+	}
+
+	/******************************
+	Función encargada de coger un mensaje
+	Devuelve
+		Datos de un mensaje
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mdatosmensaje() {
+		$con = conexionbasedatos();
+
+		$idmensaje = $_GET["idmensaje"];
+		
+		$consulta = "select animales.idanimal, usuarios.usuario, nombre, mensaje, fecha, hora, asunto from mensajes
+							join usuarios on mensajes.idusuario = usuarios.id
+							left join animales on animales.idanimal = mensajes.idanimal
+							where idmensaje = '$idmensaje'";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
 
 
 ?>

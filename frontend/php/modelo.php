@@ -119,7 +119,7 @@
 	function mlistadoimagenesconlink($idanimal){
 		$imagenes_array = mlistadoimagenes($idanimal);
 		$i = 0;
-		$dir= 'http://localhost/siw/PaginaWebSIW-master/backend/admin/imagenes';
+		$dir= '../../backend/admin/imagenes';
 		foreach($imagenes_array as $img){
 			$target_path = $dir.'/'.$img;
 			$imagenes_array[$i] = "<a title= '".$img."'href='".$target_path."'><img src= '".$target_path."' alt='".$img."''".$img."'width='200' height='200'/></a>";

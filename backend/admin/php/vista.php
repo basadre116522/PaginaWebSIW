@@ -374,7 +374,7 @@
 				$aux = str_replace("##raza##", $datos["raza"], $aux);
 				$imagenes_array = mlistadoimagenes($datos["idanimal"]);
 				$i = 0;
-				$dir= 'http://localhost/siw/PaginaWebSIW-master/backend/admin/imagenes';
+				$dir= '../imagenes';
 				foreach($imagenes_array as $img){
 					$target_path = $dir.'/'.$img;
 					$imagenes_array[$i] = "<a href='".$target_path."'>".$img."</a>";
@@ -419,4 +419,130 @@
 		
 	}
 	
+	function vmostrarlistadomensajesenviados($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/listadomensajesenviados.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$trozos = explode("##fila##", $cadena);
+			$cuerpo = "";
+			$aux = "";
+			while ($datos = $resultado->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##usuario##", $datos["usuario"], $aux);
+				$aux = str_replace("##asunto##", $datos["asunto"], $aux);
+				$aux = str_replace("##idmensaje##", $datos["idmensaje"], $aux);
+				$aux = str_replace("##fecha##", $datos["fecha"], $aux);
+				$cuerpo .= $aux;
+			}
+
+			echo $trozos[0] . $cuerpo . $trozos[2];
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de razas", "Alta de raza", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1112");
+			}
+		}
+	}
+
+	function vmostrarlistadomensajesrecibidos($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/listadomensajesrecibidos.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$trozos = explode("##fila##", $cadena);
+			$cuerpo = "";
+			$aux = "";
+			while ($datos = $resultado->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##usuario##", $datos["usuario"], $aux);
+				$aux = str_replace("##asunto##", $datos["asunto"], $aux);
+				$aux = str_replace("##idmensaje##", $datos["idmensaje"], $aux);
+				$aux = str_replace("##fecha##", $datos["fecha"], $aux);
+				$cuerpo .= $aux;
+			}
+
+			echo $trozos[0] . $cuerpo . $trozos[2];
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de razas", "Alta de raza", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1112");
+			}
+		}
+	}
+
+
+	function vmostrarredactarmensaje() {
+		$cadena = file_get_contents("../html/redactarmensaje.html");
+		$cadena = vmontarmenu($cadena);
+		echo $cadena;		
+	}
+
+
+
+	/******************************
+	Función encargada de mostrar resultado redactar mensaje
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadoredactarmensaje($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Mensajes", "Redactar mensaje", "Se ha enviado el mensaje correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Mensajes", "Redactar mensaje", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1223");
+				break;
+		}
+	}
+
+	function vmostrarmensajeenviado($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/mostrarmensaje.html");
+			$cadena = vmontarmenu($cadena);
+			
+			while ($datos = $resultado->fetch_assoc()) {
+				print_r($datos);
+				$cadena = str_replace("##asunto##", $datos["asunto"], $cadena);
+				$cadena = str_replace("##corresponsal##", $_SESSION["usuario"], $cadena);
+				$cadena = str_replace("##fecha##", $datos["fecha"], $cadena);
+				$cadena = str_replace("##hora##", $datos["hora"], $cadena);
+				$cadena = str_replace("##destinatario##", $datos["usuario"], $cadena);
+				$cadena = str_replace("##mensaje##", $datos["mensaje"], $cadena);
+				$cadena = str_replace("##animal##", $datos["nombre"], $cadena);
+				$cadena = str_replace("##idanimal##", $datos["idanimal"], $cadena);
+
+			}
+
+			echo $cadena;
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de razas", "Alta de raza", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1112");
+			}
+		}
+	}
+
+	function vmostrarmensajerecibido($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/mostrarmensaje.html");
+			$cadena = vmontarmenu($cadena);
+			
+			while ($datos = $resultado->fetch_assoc()) {
+				$cadena = str_replace("##asunto##", $datos["asunto"], $cadena);
+				$cadena = str_replace("##corresponsal##", $datos["usuario"], $cadena);
+				$cadena = str_replace("##fecha##", $datos["fecha"], $cadena);
+				$cadena = str_replace("##hora##", $datos["hora"], $cadena);
+				$cadena = str_replace("##destinatario##", $_SESSION["usuario"], $cadena);
+				$cadena = str_replace("##mensaje##", $datos["mensaje"], $cadena);
+				$cadena = str_replace("##animal##", $datos["nombre"], $cadena);
+				$cadena = str_replace("##idanimal##", $datos["idanimal"], $cadena);
+			}
+
+			echo $cadena;
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de razas", "Alta de raza", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1112");
+			}
+		}
+	}
+
 ?>
