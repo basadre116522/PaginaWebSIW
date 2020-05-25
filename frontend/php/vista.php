@@ -10,9 +10,16 @@
 		echo vmontarcabecera($cadena, $listadorazas);
 	}
 
-	function vmontarcabecera($cadena, $listadorazas) {
+	function vmontarcabecera($cadena/*, $listadorazas*/) {
 		$cabecera = file_get_contents("../html/cabecera.html");
-		$trozos = explode("##fila##", $cabecera);
+		if (isset($_SESSION["usuario"]) and isset($_SESSION["password"])) {
+			$botones = file_get_contents("../html/botonessalir.html");
+			$cabecera = str_replace("##botones##", $botones, $cabecera);
+		} else {
+			$botones = file_get_contents("../html/botonesentrar.html");
+			$cabecera = str_replace("##botones##", $botones, $cabecera);
+		}
+		/*$trozos = explode("##fila##", $cabecera);
 
 		$aux = "";
 		$cuerpo = "";
@@ -23,7 +30,7 @@
 			$cuerpo .= $aux;
 		}
 
-		$cabecera = $trozos[0] . $cuerpo . $trozos[2];
+		$cabecera = $trozos[0] . $cuerpo . $trozos[2];*/
 		$cadena = str_replace("##cabecera##", $cabecera, $cadena);
 		return $cadena;
 	}
@@ -43,6 +50,79 @@
 
 		return $trozos[0] . $cuerpo . $trozos[2];
 
+	}
+	
+	function vmostrarmensaje($titulo, $subtitulo, $texto) {
+		$cadena = file_get_contents("../html/mensaje.html");
+		$cadena = vmontarcabecera($cadena);
+		$cadena = str_replace("##titulo##", $titulo, $cadena);
+		$cadena = str_replace("##subtitulo##", $subtitulo, $cadena);
+		$cadena = str_replace("##texto##", $texto, $cadena);
+		echo $cadena;
+	}
+
+	function vmostrarlogin() {
+		echo file_get_contents("../html/login.html");
+	}
+
+	function vmostrarresultadologin($resultado) {
+		// si da error hacer que te mande nuevo al login directamnete 
+		//$cadena = file_get_contents("../html/login.html");
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				break; 
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+				break; 
+		}	
+		
+	}
+
+	function vmostrarresultadologout($resultado) {
+		//$cadena = file_get_contents("../html/logout.html");
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Logout", "Logout de usuario", "Se ha cerrado la sesión corretamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				break; 
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+				break; 
+		}	
+		
+	}
+
+	function vmostrarsignup() {
+		echo file_get_contents("../html/signup.html");
+	}
+
+	function vmostrarresultadosignup($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Registro de Usuario", "Registrar", "Se ha registrado el usuario correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Registro de Usuario", "Registrar", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1111");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Registro de Usuario", "Registrar", "Ya existe un usuario con ese nombre.");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Registro de Usuario", "Registrar", "Las contraseñas no coinciden.");
+				break; 
+		}
 	}
 
 	function vmostrardatos($resultado, $resultado2){

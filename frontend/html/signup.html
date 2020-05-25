@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Registro Usuario</title>
+  <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body background="../imagenes/fondo7.jpg">
+  	  <div>
+		<h3>Registro Usuario</h3>
+	  </div>
+	  <div>
+	  <form id="login" method="post" action="index.php">
+			<label for="usuario">Introduzca el Nombre de Usuario</label>
+			<input type="text" id="usuario" name="usuario" required><br>
+
+			<label for="password">Introduzca la Contraseña</label>
+			<input type="password" id="password" name="password1" required><br>
+
+			<label for="password">Repita la Contraseña</label>
+			<input type="password" id="password2" name="password2" required><br>
+
+			<input type="hidden" name="accion" value="signup">
+			<input type="hidden" name="id" value="2">
+		  
+			<button type="submit">Registrar</button>
+		</form>
+	</div>
+</body>
+</html>

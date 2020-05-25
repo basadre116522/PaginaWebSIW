@@ -17,6 +17,74 @@
 		}
 	}
 
+	function mvalidarlogin() {
+		$con = conexionbasedatos();
+
+		$usuario = $_POST["usuario"];
+		$password = md5($_POST["password"]);
+		$consulta = "select * from usuarios where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				if ($password == $datos["password"]) {
+					$_SESSION["usuario"] = $usuario;
+					$_SESSION["password"] = $password;
+					return 1; // todo ok
+				} else {
+					return -3; //se ha introducido mal la contraseña
+				}
+			} else {
+				return -2; //no existe usuario
+			}
+		} else {
+			return -1;
+		}
+	}
+
+	function mvalidarlogout() {
+		$con = conexionbasedatos();
+		$usuario = $_SESSION["usuario"];
+		$password = $_SESSION["password"];
+		$consulta = "select * from usuarios where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			$_SESSION["usuario"] = null;
+			$_SESSION["password"] = null;
+			return 1; // todo ok
+		} else {
+			return -1;
+		}
+	}
+
+	function mvalidarsignup() {
+		$con = conexionbasedatos();
+
+		$usuario = $_POST["usuario"];
+		$password1 = md5($_POST["password1"]);
+		$password2 = md5($_POST["password2"]);
+		$consulta = "select * from usuarios where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				return -2; // ya existe usuario con ese nombre
+			}
+		} else {
+			return -1; // fallo base de datos
+		}
+
+		if ($password1 == $password2) {
+			$consulta = "insert into usuarios (usuario, password) values ('$usuario','$password1')";
+
+			if ($resultado = $con->query($consulta)) {
+				$_SESSION["usuario"] = $usuario;
+				$_SESSION["password"] = $password1;
+				return 1;
+			} else {
+				return -1;
+			}
+		} else {
+			return -3; // las contraseñas no coinciden
+		}
+		
+	}
+
 	function mcargarrazas() {
 		$con = conexionbasedatos();
 

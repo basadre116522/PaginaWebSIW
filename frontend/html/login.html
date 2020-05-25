@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login Usuario</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body background="../imagenes/fondo7.jpg">
+  	  <div>
+		<h3>Login Usuario</h3>
+	  </div>
+	  <div>
+	  <form id="login" method="post" action="index.php">
+			<label for="usuario">Usuario</label>
+			<input type="text" id="usuario" name="usuario" required><br>
+
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required><br>
+
+			<input type="hidden" name="accion" value="login">
+			<input type="hidden" name="id" value="2">
+		  
+			<button type="submit">Acceder</button>
+		</form>
+	</div>
+</body>
+</html>
