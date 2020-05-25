@@ -65,6 +65,12 @@
 				break;
 
 		}	
+	} elseif ($accion == "exportarpdf") {
+		switch ($id) {
+			case 1 :
+				vcargarpdf(mlistadoanimales());
+				break;
+		}	
 	}
 
 

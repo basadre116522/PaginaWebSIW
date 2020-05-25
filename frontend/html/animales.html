@@ -32,6 +32,11 @@
 	<div id=cabecera>##cabecera##</div>
 	<h2>ANIMALES EN ADOPCION</h2><br><br>
 	<aside id="menu"></aside>
+	<form role="form" method="post" action="index.php">
+        <input type="hidden" name="accion" value="exportarpdf">
+        <input type="hidden" name="id" value="1">
+        <button type="submit">Exportar en PDF</button>
+	</form>
 	<div id="animales">Aquí va la tabla de animales</div>
 	<div id="paginacion">paginación</div>
 </body>

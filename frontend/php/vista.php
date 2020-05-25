@@ -1,4 +1,6 @@
 <?php
+	require_once './dompdf/autoload.inc.php';
+	use Dompdf\Dompdf;
 
 	function vmostrarstartpage($listadorazas) {
 		$cadena = file_get_contents("../html/startpage.html");
@@ -177,6 +179,19 @@
 		} else {
 			echo "Error en la consulta.";
 		}
+	}
+
+	function vcargarpdf($resultado) {
+		$contenido = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>PDF</title></head><body><table><thead><th>Nombre</th><th>Raza</th><th>Edad</th><th>Género</th><th>FechaEntrada</th><th>Descripcion</th></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+		while ($datos = $resultado->fetch_assoc()) {
+			$contenido .= "<tr><td>".$datos["nombre"]."</td><td>".$datos["raza"]."</td><td>".$datos["edad"]."</td><td>".$datos["genero"]."</td><td>".$datos["fechaentrada"]."</td><td>".$datos["descripcion"]."</td></tr>";
+		}
+		$contenido .= "</tbody></table></body></html>";
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($contenido);
+		$dompdf->render();
+		$pdf = $dompdf->output();
+		$dompdf-> stream();
 	}
 
 

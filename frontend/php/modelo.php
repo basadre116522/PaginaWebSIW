@@ -97,6 +97,18 @@
 			}
 	}
 
+	function mlistadoanimales() {
+		$con = conexionbasedatos();
+
+		$consulta = "select idanimal, nombre, raza, edad, genero, fechaentrada, descripcion from animales join razas on animales.idraza = razas.idraza";
+
+		if ($resultado = $con->query($consulta)) {
+				return $resultado;
+			} else {
+				return -1;
+			}
+	}
+
 	function mcargaranimales() {
 		$con = conexionbasedatos();
 
