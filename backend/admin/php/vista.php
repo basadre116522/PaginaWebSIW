@@ -588,8 +588,44 @@
 				vmostrarmensaje("Gestión de animales", "Alta csv de animal", "Se ha dado de alta los animales correctamente.");
 				break;
 			case '-1' :
-				vmostrarmensaje("Gestión de razas", "Alta csv de animal", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1224");
+				vmostrarmensaje("Gestión de animal", "Alta csv de animal", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1224");
 				break; 
 		}
 	}
+
+
+	/******************************
+	Función encargada de mostrar si han sido correctamente exportados los datos de animales a json
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadoexportjsonanimal($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de animales", "Exportacion a json", "Se ha formado el fichero json correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de animales", "Exportacion a json", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1230");
+				break; 
+		}
+	}
+
+	/******************************
+	Función encargada de mostrar si han sido correctamente exportados los datos de razas a json
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadoexportjsonraza($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de razas", "Exportacion a json", "Se ha formado el fichero json correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de razas", "Exportacion a json", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1231");
+				break; 
+		}
+	}
+
 ?>
