@@ -73,6 +73,17 @@
 				}
 			}
 
+			if ($accion == "csvraza") {
+				switch ($id) {
+					case '1': 
+						vmostrarcsvraza();
+						break;
+					case '2': 
+						vmostrarresultadocsvraza(mleercsvraza());
+						break;
+				}
+			}
+
 			if ($accion == "altaanimal") {
 				switch ($id) {
 					case '1': 
@@ -110,6 +121,17 @@
 						vmostrarresultadoeliminaranimal(meliminaranimal());
 						break;
 				}		
+			}
+
+			if ($accion == "csvanimal") {
+				switch ($id) {
+					case '1': 
+						vmostrarcsvanimal();
+						break;
+					case '2': 
+						vmostrarresultadocsvanimal(mleercsvanimal());
+						break;
+				}
 			}
 
 			if ($accion == "listadomensajesrecibidos") {

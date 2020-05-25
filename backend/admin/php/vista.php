@@ -545,4 +545,51 @@
 		}
 	}
 
+
+	function vmostrarcsvraza() {
+		$cadena = file_get_contents("../html/csvraza.html");
+		$cadena = vmontarmenu($cadena);
+		echo $cadena;		
+	}
+
+	function vmostrarcsvanimal() {
+		$cadena = file_get_contents("../html/csvanimal.html");
+		$cadena = vmontarmenu($cadena);
+		echo $cadena;		
+	}
+
+
+	/******************************
+	Función encargada de mostrar resultado alta de csv de razas
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadocsvraza($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de razas", "Alta csv de raza", "Se ha dado de alta las razas correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de razas", "Alta csv de raza", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1223");
+				break; 
+		}
+	}
+
+	/******************************
+	Función encargada de mostrar resultado alta de csv de animales
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadocsvanimal($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de animales", "Alta csv de animal", "Se ha dado de alta los animales correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de razas", "Alta csv de animal", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1224");
+				break; 
+		}
+	}
 ?>

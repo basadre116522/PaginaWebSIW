@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LecturaCsvAnimales</title>
+  <link rel="stylesheet" href="../css/csvanimal.css">
+</head>
+<body>
+	<div id="divmenu" class="divmenu">
+      ##menu##
+    </div>
+	<main>
+  	  <div>
+		<h3>Alta de animales por medio de Fichero csv</h3>
+	  </div>
+	  <div>
+	  <form role="form" method="get" action="index.php">
+		  <div>
+			<input type="file" id="fichero" name="fichero" accept=".csv">
+			<br>
+		    <input type="hidden" name="accion" value="csvanimal">
+		    <input type="hidden" name="id" value="2">
+          </div>
+          <br>
+		  <div>
+		    <button type="submit">Leer fichero</button>
+		  </div>
+	  </form>
+	</div>
+	</main>
+</body>
+</html>

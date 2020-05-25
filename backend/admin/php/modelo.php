@@ -519,5 +519,111 @@
 		}
 	}
 
+	/******************************
+	Función encargada de leer un fichero csv que contenga los datos de razas y introducirlo en la base de datos
+	Devuelve
+		Datos de un mensaje
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mleercsvraza(){
+		$con = conexionbasedatos();
+		$fichero = $_GET["fichero"];
+		$directorio = '../csv';
+		$path = $directorio.'/'.$fichero;
+		
+		if (($gestor = fopen($path, "r")) !== FALSE) {
+			while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+				$raza = $datos[0];
+
+				$consulta = "select raza from razas where raza = '$raza'";
+				if ($resultado = $con->query($consulta)) {
+					if ($datos = $resultado->fetch_assoc()) {
+						echo "error: la raza $raza ya existe <br/>";
+					}
+					else {
+						$consulta = "insert into razas (raza) values ('$raza')";
+		
+						if ($resultado != $con->query($consulta)) {
+							return -1;
+						}
+					}
+				} else {
+					return -1;
+				}
+		
+
+			}
+			fclose($gestor);
+			return 1;
+		}
+	}
+
+	/******************************
+	Función encargada de leer un fichero csv que contenga datos de animales y introducirlo en la base de datos
+	Devuelve
+		Datos de un mensaje
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mleercsvanimal(){
+		$con = conexionbasedatos();
+		$fichero = $_GET["fichero"];
+		$directorio = '../csv';
+		$path = $directorio.'/'.$fichero;
+		
+		if (($gestor = fopen($path, "r")) !== FALSE) {
+			while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+				$nombre = $datos[0];
+				$edad = $datos[1];
+				$genero = $datos[2];
+				$descripcion = $datos[3];
+				$fechaentrada = $datos[4];
+				$raza = $datos[5];
+				$imagenes = explode(" ", $datos[6]);
+				$consulta = "select idraza from razas where raza = '$raza'";
+				if ($resultado = $con->query($consulta)) {
+					if ($datos = $resultado->fetch_assoc()) {
+						$idraza = $datos["idraza"];
+					}
+				}
+				if (isset($idraza)) {
+					$consulta = "insert into animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
+		
+					if ($resultado = $con->query($consulta)) {
+						foreach($imagenes as $imagen) {			
+							$directorio = '../imagenes'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+								
+							//Validamos si la ruta de destino existe, en caso de no existir la creamos
+							if(!file_exists($directorio)){
+								mkdir($directorio, 0777) or die("No se puede crear el directorio de extracci&oacute;n");	
+							}
+								
+							$dir=opendir($directorio); //Abrimos el directorio de destino
+							$path = $directorio.'/'.$imagen; //Indicamos la ruta de destino, así como el nombre del archivo
+							//Comprobamos si existe la imagen para que funcione las imagenes tienen que estar en una carpeta en concreto
+							if(file_exists($path)) {	
+								closedir($dir); 
+								$consulta = "select idanimal from animales order by idanimal desc limit 1";
+								if ($resultado = $con->query($consulta)) {
+									if ($datos = $resultado->fetch_assoc()){
+										$idanimal = $datos["idanimal"];
+										$consulta = "insert into imagenes (idanimal, imagen) value ('$idanimal','$imagen')";
+										if (!$resultado = $con->query($consulta)) {
+											echo "error al insertar  la imagen $imagen en el animal $idanimal <br />";
+										}
+									}
+								} else {	
+									closedir($dir); 
+								}
+							}
+						}
+					}
+				}		
+			}
+			fclose($gestor);
+			return 1;
+		} else {
+			return -2;
+		}
+	}
 
 ?>
