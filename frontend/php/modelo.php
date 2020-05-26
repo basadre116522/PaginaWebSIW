@@ -202,12 +202,67 @@
 		$dir= '../../backend/admin/imagenes';
 		foreach($imagenes_array as $img){
 			$target_path = $dir.'/'.$img;
-			$imagenes_array[$i] = "<a title= '".$img."'href='".$target_path."'><img src= '".$target_path."' alt='".$img."''".$img."'width='200' height='200'/></a>";
+			$imagenes_array[$i] = "<a title= '".$img."'href='".$target_path."'><img src= '".$target_path."_thumbM' alt='".$img."''".$img."'width='200' height='200'/></a>";
 			$i++;
 			// Quitar la modificacion del tamaño en cuanto sepa usar css
 		}
 		$imagenes = implode(" ", $imagenes_array);
 		return $imagenes;
 	}
+
+	//Selecciona de las imagenes de el animal en concreto para incluirla reescalada en la lista
+	function mseleccionarimagen($idanimal){
+		$con = conexionbasedatos();
+		$consulta = "select imagen from imagenes where idanimal = '$idanimal'";
+		if ($resultado = $con->query($consulta)) {
+			if($resultado->num_rows > 0){
+				$row = $resultado->fetch_assoc();
+				$imagen = $row["imagen"];
+				$dir = "../../backend/admin/imagenes";
+				$nomOriginal = $dir. "/". $imagen;
+				$tipo = strstr($nomOriginal, ".");
+				if ($tipo == ".png") {
+					$nomOriginalSinTipo = str_replace(".png", "", $nomOriginal);
+					$tipo = ".png";
+				} else {
+					$nomOriginalSinTipo = str_replace(".jpeg", "", $nomOriginal);
+					$tipo = ".jpeg";
+				}
+				$target_path = $nomOriginalSinTipo . "_thumbM" . $tipo;
+				return "<a title= '".$imagen."'href='".$nomOriginal."'><img src= '".$target_path."' alt='".$imagen."''".$imagen."/></a>";
+	
+			}
+			else {
+				return "";
+			}
+			
+		} else {
+			return -1;
+		}
+	}
+
+	function mgetimagenesanimal() {
+		$con = conexionbasedatos();
+		$idanimal = $_GET["idanimal"];
+		$consulta = "select imagen from imagenes where idanimal = '$idanimal'";
+		if ($resultado = $con->query($consulta)){
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
+	
+	function mdatosanimal(){
+		$con = conexionbasedatos();
+		$idanimal = $_GET["idanimal"];
+		$consulta = "select * from animales join razas on animales.idraza = razas.idraza where idanimal = '$idanimal'";
+		if ($resultado = $con->query($consulta)){
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
+
+
 
 ?>

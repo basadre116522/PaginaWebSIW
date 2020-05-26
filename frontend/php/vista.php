@@ -160,8 +160,9 @@
 				$aux = str_replace("##genero##", $datos["genero"], $aux);
 				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
 				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
-				$imagenes = mlistadoimagenesconlink($datos["idanimal"]);
-				$aux = str_replace("##imagen##", $imagenes, $aux);
+				$aux = str_replace("##idanimal##", $datos["idanimal"], $aux);
+				$imagen = mseleccionarimagen($datos["idanimal"]);
+				$aux = str_replace("##imagen##", $imagen, $aux);
 
 				$cuerpo .= $aux;
 			}
@@ -194,7 +195,65 @@
 		$dompdf-> stream();
 	}
 
+	function vmostraranimal($resultadoImagenes,$resultadoAnimal) {
+		$cadena = file_get_contents("../html/mostraranimal.html");
+		$cadena = vmontarcabecera($cadena);
 
+		$numFotos = 0;
+		while ($datos = $resultadoAnimal->fetch_assoc()) {
+			$cadena = str_replace("##nombre##", $datos["nombre"], $cadena);
+			$cadena = str_replace("##edad##", $datos["edad"], $cadena);
+			$cadena = str_replace("##genero##", $datos["genero"], $cadena);
+			$cadena = str_replace("##fechaentrada##", $datos["fechaentrada"], $cadena);
+			$cadena = str_replace("##descripcion##", $datos["descripcion"], $cadena);
+			$cadena = str_replace("##raza##", $datos["raza"], $cadena);
+			$imagen = mseleccionarimagen($datos["idanimal"]);
+			$cadena = str_replace("##imagenes##", $imagen, $cadena);
+		}
+
+		while ($imagenes = $resultadoImagenes->fetch_assoc()) {
+			$numFotos = $numFotos + 1;
+			$imagen = $imagenes["imagen"];
+			$dir = "../../backend/admin/imagenes";
+			$nomOriginal = $dir. "/". $imagen;
+			$tipo = strstr($nomOriginal, ".");
+			if ($tipo == ".png") {
+				
+				$nomOriginalSinTipo = str_replace(".png", "", $nomOriginal);
+				$tipo = ".png";
+			} else {
+				$nomOriginalSinTipo = str_replace(".jpeg", "", $nomOriginal);
+				$tipo = ".jpeg";
+			}
+			if ($numFotos == 1) {
+				/* La primera foto de la galería va a tener tamaño mediano */
+				$cadena = str_replace("##IMAGEN$numFotos##", $nomOriginalSinTipo . "_thumbM" . $tipo, $cadena);
+			}
+			if (($numFotos > 1) && ($numFotos < 7)) {
+				/* El resto de fotos van a tener tamaño mediano */
+				$cadena = str_replace("##IMAGEN$numFotos##", $nomOriginalSinTipo . "_thumbP" . $tipo, $cadena);
+				$cadena = str_replace("##reemplazo$numFotos##", "onclick='replaceP()'", $cadena);
+			}
+		}
+		while ($numFotos < 6) {
+			$numFotos = $numFotos + 1;
+			if ($numFotos == 1) {
+				/* La primera foto de la galería va a tener tamaño mediano */
+				$cadena = str_replace("##IMAGEN$numFotos##", "imagenes/image-not-found_thumbM.png", $cadena);
+			}
+			if (($numFotos > 1) && ($numFotos < 7)) {
+				/* El resto de fotos van a tener tamaño mediano */
+				$cadena = str_replace("##IMAGEN$numFotos##", "imagenes/image-not-found_thumbP.png", $cadena);
+				$cadena = str_replace("##reemplazo$numFotos##", "", $cadena);
+			}
+		}
+		if ($numFotos == 0) {
+			$cadena = str_replace("##MENSAJEVACIA##", "No hay contenido que mostrar", $cadena);
+		} else {
+			$cadena = str_replace("##MENSAJEVACIA##", "", $cadena);
+		}
+		echo $cadena;
+	}
 
 
 ?>

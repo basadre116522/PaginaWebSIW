@@ -129,9 +129,6 @@
 					case '7':
 						vmostrarsubirimagenesdropzone();
 					break;
-					case '7':
-						vmostrarsubirimagenesdropzone();
-					break;
 				}		
 			}
 

@@ -1,0 +1,155 @@
+   <script>
+        
+        function replaceP() {
+            var str1 = document.getElementById(event.target.id).src;
+            var str2 = document.getElementById('imagenPrincipal').src;
+            var newstr = str1.replace(/_thumbP/, "_thumbM");
+            document.getElementById('imagenPrincipal').src = newstr;
+            newstr = str2.replace(/_thumbM/, "_thumbP");
+            document.getElementById(event.target.id).src = newstr;
+        }
+    
+        function navegarGaleria() {
+            document.getElementById('galeriaNoNav').style.display = 'none';
+            /* Cargamos las imágenes grandes */
+            // Caso de la imagenPrincipal [mediana]
+            var str = document.getElementById(event.target.id).src;
+            var newstr = str.replace(/_thumbM/, "_thumbG");
+            document.getElementById('imagenGrande1').src = newstr;
+            // Resto de casos [pequeñas] (con un for)
+            for (i = 2; i < 7; i++) {
+                str = document.getElementById('imagen' + i).src;
+                newstr = str.replace(/_thumbP/, "_thumbG");
+                document.getElementById('imagenGrande' + i).src = newstr;
+            }
+            $('#galeriaNav').toggle();
+        }
+    
+        function noNavegarGaleria() {
+            document.getElementById('galeriaNoNav').style.display = 'block';
+            document.getElementById('galeriaNav').style.display = 'none';
+        }
+    
+    </script>
+    
+    <body onload="cargaranimales('',1)" background="../imagenes/fondo7.jpg">
+        <div id=cabecera>##cabecera##</div>
+        <div>Nombre: ##nombre##</div>
+        <br>
+        <div>Edad: ##edad##</div>
+        <br>
+        <div>Género: ##genero##</div>
+        <br>
+        <div>Fecha Entrada: ##fechaentrada##</div>
+        <br>
+        <div>Raza: ##raza##</div>
+        <br>
+        <div>Descripcion: ##descripcion##</div>
+        <br>
+        <div class="galeria">
+            <!-- Título de la galeria -->
+            <div class="title">
+                <h3 nombre="tituloGaleria" id="tituloGaleria"></h3>
+            </div>
+            <!---->
+            <!-- Capa de navegación -->
+            <div style="display: none" class="galeriaNav" name="galeriaNav" id="galeriaNav">
+        
+                <script>
+                    var slideIndex = 0;
+                    var slides = document.getElementsByClassName("mySlides");
+        
+                    showSlides();
+        
+                    function showSlides() {
+                        for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                        }
+                        // Asumimos que primer indice es el 1
+                        slideIndex++;
+                        // Mostramos la imagen principal
+                        slides[slideIndex - 1].style.display = "block";
+                    }
+        
+                    function plusSlides(value) {
+                        // Modificamos el indice
+                        slideIndex = slideIndex + value;
+                        if (value == 1) {
+                            // Avanzamos (length nos dice el numero total de imagenes de la galeria -> 6)
+                            if(slideIndex > slides.length) {slideIndex = 1}
+                            if(slideIndex == 1) {
+                                slides[5].style.display = "none";
+                                slides[slideIndex - 1].style.display = "block";
+                            } else {
+                                slides[slideIndex - 2].style.display = "none";
+                                slides[slideIndex - 1].style.display = "block";
+                            }
+                        } else {
+                            // Retrocedemos (el problema esta cuando slideIndex vale 1)
+                            if(slideIndex < 1) {slideIndex = 6}
+                            if(slideIndex == 6) {
+                                slides[0].style.display = "none";
+                                slides[slideIndex - 1].style.display = "block";
+                            } else {
+                                slides[slideIndex].style.display = "none";
+                                slides[slideIndex - 1].style.display = "block";
+                            }
+                        }
+                    }
+        
+                </script>
+        
+                <div class="mySlides fade">
+                <div class="numbertext">1 / 6</div>
+                <img src="" id="imagenGrande1" style="width:100%">
+                </div>	
+        
+                <div class="mySlides fade">
+                <div class="numbertext">2 / 6</div>
+                <img src="" id="imagenGrande2" style="width:100%">
+                </div>
+        
+                <div class="mySlides fade">
+                <div class="numbertext">3 / 6</div>
+                <img src="" id="imagenGrande3" style="width:100%">
+                </div>	
+        
+                <div class="mySlides fade">
+                <div class="numbertext">4 / 6</div>
+                <img src="" id="imagenGrande4" style="width:100%">
+                </div>	
+        
+                <div class="mySlides fade">
+                <div class="numbertext">5 / 6</div>
+                <img src="" id="imagenGrande5" style="width:100%">
+                </div>	
+        
+                <div class="mySlides fade">
+                <div class="numbertext">6 / 6</div>
+                <img src="" id="imagenGrande6" style="width:100%">
+                </div>
+        
+                <!-- Botones de control -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <!---->
+            </div>
+            <!---->
+            <!-- Capa de no navegación -->
+            <div name="galeriaNoNav" id="galeriaNoNav">
+                <div class="principal">
+                    <!-- Cuando pinchamos la imagen principal mediana, se muestra una capa con la foto grande -->
+                    <img src="##IMAGEN1##" id="imagenPrincipal" onclick="navegarGaleria()">
+                </div>
+                <!-- Las imágenes 2-6 siempre van a ser de tamaño pequeño -->
+                <!-- Cuando pinchamos sobre las imagenes pequeñas, se mostraran en la zona de la imagen principal mediana -->
+                <br><div class="fila">
+                    <img src="##IMAGEN2##" id="imagen2" ##reemplazo2##>
+                    <img src="##IMAGEN3##" id="imagen3" ##reemplazo3##>
+                    <img src="##IMAGEN4##" id="imagen4" ##reemplazo4##>
+                    <img src="##IMAGEN5##" id="imagen5" ##reemplazo5##>
+                    <img src="##IMAGEN6##" id="imagen6" ##reemplazo6##>
+                </div>
+            </div>
+        </div>
+    </body>

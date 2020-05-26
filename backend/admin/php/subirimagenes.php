@@ -2,15 +2,20 @@
 	$con = mysqli_connect("localhost", "root", "", "db_grupo35");
 	$idanimal = $_GET["idanimal"];
 	$trozos = explode("/", $_FILES["file"]["type"]);
+	$tipo = strstr($_FILES["file"]["name"], ".");
 	$dir = "../imagenes";
 	$name = $idanimal . "-" . uniqid() . "-" . time() . "-" . uniqid();
+	if($tipo== ".jpg"){
+		$tipo = ".jpeg";
+	}
+	$name_bd = $name.$tipo;
 	$rutaSinType = $dir."/" . $name;
 	$ruta = $rutaSinType . "." .  $trozos[1];
 	$tmp_name = $_FILES["file"]["tmp_name"];
 	    if (move_uploaded_file($tmp_name, $ruta)) {
     	echo "Subida OK";
     	// INSERTAMOS LA IMAGEN EN LA BD [OK]
-		$consulta = "insert into imagenes (idanimal, imagen) values ('$idanimal', '$name')";
+		$consulta = "insert into imagenes (idanimal, imagen) values ('$idanimal', '$name_bd')";
 		if ($con->query($consulta)) {
 			echo "Consulta OK";
 			// Miniatura de tamaño pequeño

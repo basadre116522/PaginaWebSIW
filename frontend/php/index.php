@@ -71,6 +71,12 @@
 				vcargarpdf(mlistadoanimales());
 				break;
 		}	
+	}elseif ($accion == "mostraranimal") {
+		switch ($id) {
+			case 1 :
+				vmostraranimal(mgetimagenesanimal(),mdatosanimal());
+				break;
+		}	
 	}
 
 
