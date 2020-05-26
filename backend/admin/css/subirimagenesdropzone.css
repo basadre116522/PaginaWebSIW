@@ -8,11 +8,15 @@
 
 main {
 	display: inline-block;
-	padding: 20px;
 	float: left;
+	padding: 20px;
 }
 
 form {
 	padding: 20px;
 }
 
+.dropzone {
+	border: 1px solid black;
+	width: 100%;	
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>dropzone</title>
+  <link rel="stylesheet" href="../css/subirimagenesdropzone.css">
+  <script type="text/javascript" src="../js/dropzone.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    // Opciones del formulario con dropzone
+    Dropzone.options.subirConDropzone = {
+        maxFilesize: 1, // MB
+        maxFiles: 4,
+        acceptedFiles: 'image/jpeg, image/png, image/jpg',
+        dictDefaultMessage: "Arrastre aquí las imágenes que desee subir",
+        dictFileTooBig: "El archivo es demasiado grande (límite: 1MB)",
+        dictInvalidFileType: "El tipo del archivo es incorrecto (solamente png, jpeg y jpg)",
+        dictMaxFilesExceeded: "El límite de fotogramas que se pueden subir por animal es 4",
+
+        success: function(file,response){
+            alert("imagenes subidas con exito");
+        }
+    };
+   </script>
+</head>
+<body>
+	<div id="divmenu" class="divmenu">
+      ##menu##
+    </div>
+  <main>
+  	  <div>
+		<h3>Subir imagenes con dropzone</h3>
+	  </div>
+	  <div>
+      <input type="hidden" name="idanimal" id="idanimal" value="##idanimal##">
+      <p> Imagenes asociadas al animal con id ##idanimal##</p>
+      <form action="subirimagenes.php?idanimal=##idanimal##" method="post" class="dropzone" id="subirConDropzone" posr>
+      </form>
+      <div nombre="info" id="info"></div>
+      <p>Formatos permitidos. png, jpg o jpeg</p>
+	</div>
+    </main>
+</body>
+</html>  

@@ -70,6 +70,9 @@
 					case '5': 
 						vmostrarresultadoeliminarraza(mvalidareliminarraza());
 						break;
+					case '6':
+						vmostrarresultadoexportjsonraza(mexportjsonraza());
+					break;
 				}
 			}
 
@@ -120,6 +123,15 @@
 					case '5': 
 						vmostrarresultadoeliminaranimal(meliminaranimal());
 						break;
+					case '6':
+						vmostrarresultadoexportjsonanimal(mexportjsonanimal());
+					break;
+					case '7':
+						vmostrarsubirimagenesdropzone();
+					break;
+					case '7':
+						vmostrarsubirimagenesdropzone();
+					break;
 				}		
 			}
 

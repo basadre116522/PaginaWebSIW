@@ -261,8 +261,8 @@
 	function mvalidarmodificaranimal() {
 		$con = conexionbasedatos();
 
-		$idanimal = $_POST["idanimal"];echo $idanimal;
-		$nombre = $_POST["nombre"];echo $nombre;
+		$idanimal = $_POST["idanimal"];
+		$nombre = $_POST["nombre"];
 		$edad = $_POST["edad"];
 		$genero = $_POST["genero"];
 		$fechaentrada = $_POST["fechaentrada"];
@@ -474,7 +474,6 @@
 						$fecha = date('Y-m-d');
 						$consulta = "insert into mensajes (idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
 						VALUES ('$idusuario', '$mensaje', '$idadmin', '$asunto', '$fecha', '$hora', '0');";
-						echo $consulta;
 						if ($resultado = $con->query($consulta)) {
 							return 1;
 						} else {
@@ -624,6 +623,67 @@
 		} else {
 			return -2;
 		}
+	}
+
+
+	function mexportjsonanimal(){
+		$con = conexionbasedatos();
+
+		//generamos la consulta
+		
+		$consulta = "select * from animales";
+		
+			if($result = $con->query($consulta)){
+				$data = array(); //creamos un array
+		
+				//guardamos en un array multidimensional todos los datos de la consulta
+				$i=0;
+			
+				while($row = $result->fetch_array())
+				{
+					$data[$i] = $row;
+					for ($j = 0; $j <= 6 ; $j++) {
+						unset($data[$i]["$j"]);
+					}
+					$i++;
+				}
+		
+				$file = '../json/animales.json';
+				file_put_contents($file, json_encode($data));
+			} else {
+				return -1;
+			}
+			return 1;
+	}
+
+	function mexportjsonraza(){
+		$con = conexionbasedatos();
+
+		//generamos la consulta
+		
+		$consulta = "select * from razas";
+		
+			if($result = $con->query($consulta)){
+				$data = array(); //creamos un array
+		
+				//guardamos en un array multidimensional todos los datos de la consulta
+				$i=0;
+			
+				while($row = $result->fetch_array())
+				{
+					$data[$i] = $row;
+					unset($data[$i]["0"]);
+					unset($data[$i]["1"]);
+					$i++;
+				}
+				
+				$file = '../json/razas.json';
+				file_put_contents($file, json_encode($data));
+
+			} else {
+				return -1;
+			}
+			return 1;
 	}
 
 ?>

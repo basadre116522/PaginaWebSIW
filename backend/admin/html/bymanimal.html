@@ -28,6 +28,7 @@
               <th>Imagenes</th>
               <th>Modificar</th>
               <th>Eliminar</th>
+              <th>dropzone</th>
             </tr>
             </thead>
             <tbody>
@@ -43,11 +44,21 @@
               <td>##imagenes##</td>
               <td><a href="index.php?accion=bymanimal&id=2&idanimal=##idanimal##">Modificar</a></td>
               <td><a href="index.php?accion=bymanimal&id=4&idanimal=##idanimal##">Eliminar</a></td>
+              <td><a href="index.php?accion=bymanimal&id=7&idanimal=##idanimal##">subir Imágenes</a></td>
             </tr>
             ##fila##
             </tfoot>
           </table>
         </div>
+        <form role="form" method="post" action="index.php">
+          <div>
+                <input type="hidden" name="accion" value="bymanimal">
+                <input type="hidden" name="id" value="6">
+          </div>
+          <div>
+            <button type="submit">Exportar como json</button>
+          </div>
+        </form>
 	</div>
 	</main>
 </body>
