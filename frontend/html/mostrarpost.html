@@ -14,16 +14,17 @@
         <div>##post##</div><br>
     </div>
     <form id="comentar" method="post" action="index.php">
-        <textarea id="comentario" cols="50" rows="5"></textarea>
+        <textarea id="comentario" name="comentario" cols="50" rows="5"></textarea>
         <input type="hidden" name="accion" value="comentar">
         <input type="hidden" name="id" value="1">
+        <input type="hidden" name="idpost" value="##idpost##">
         <button type="submit">Dejar Comentario</button>
     </form>
     <h3>COMENTARIOS</h3>
-    <div id="comentarios">
+    <div id="comentarios"><br>
         ##fila##
             <h4>##usuario##</h4> ha comentado
-            <div>##comentario##</div>
+            <div>##comentario##</div><br>
         ##fila##
     </div>
 </body>

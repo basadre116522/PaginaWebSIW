@@ -520,5 +520,28 @@
 
 	}
 
+	function malmacenarcomentario() {
+		$con = conexionbasedatos();
+
+		$usuario = $_SESSION["usuario"];
+		$comentario = $_POST["comentario"];
+		$idpost = $_POST["idpost"];
+
+		$consulta = "select id from usuarios where usuario='$usuario'";
+
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				$idusuario = $datos["id"];
+
+				$consulta = "insert into comentarios (comentario, idpost, idusuario) values ('$comentario', '$idpost', '$idusuario')";
+				if ($resultado = $con->query($consulta)) {
+					return 1;
+				} else {
+					return -1;
+				}
+			}
+		}
+	}
+
 
 ?>

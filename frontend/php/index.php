@@ -151,6 +151,17 @@
 				vmostrarpost(mcargarcomentarios(), mdatospost());
 				break;
 		}	
+	} elseif ($accion == "comentar") {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			switch ($id) {
+				case '1':
+					vmostrarresultadocomentario(malmacenarcomentario());
+					break;
+			}
+		} else {
+			header("Location: index.php?accion=login&id=1");
+		}
 	}
 
 

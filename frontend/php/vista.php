@@ -520,6 +520,7 @@
 
 			while ($datos = $resultado2->fetch_assoc()) {
 				$cadena = str_replace("##titulo##", $datos["titulo"], $cadena);
+				$cadena = str_replace("##idpost##", $datos["idpost"], $cadena);
 				$cadena = str_replace("##post##", $datos["post"], $cadena);
 				$cadena = str_replace("##autor##", $datos["usuario"], $cadena);
 			}
@@ -531,7 +532,6 @@
 				$aux = $trozos[1];
 				$aux = str_replace("##usuario##", $datos["usuario"], $aux);
 				$aux = str_replace("##comentario##", $datos["comentario"], $aux);
-				$aux = str_replace("##idpost##", $datos["idpost"], $aux);
 
 				$cuerpo .= $aux;
 			}
@@ -541,6 +541,18 @@
 		} else {
 			echo "Error en la consulta";
 		} 
+	}
+
+	function vmostrarresultadocomentario($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Comentarios", "Comentar", "Se ha comentado correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Comentarios", "Comentar", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1223");
+				break;
+		}
+
 	}
 
 ?>
