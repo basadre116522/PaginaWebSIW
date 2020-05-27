@@ -381,4 +381,62 @@
 		}
 	}
 
+	function vmostrardatosbusqueda($resultado) {
+		if ($resultado[0] >= 0) {
+			//Nos centramos en la paginas
+			$numpaginas = intdiv($resultado[0],3);
+			$resto = $resultado[0] % 3;
+
+			if ($resto > 0) {
+				$numpaginas ++;
+			}
+
+			$paginacionprimera = file_get_contents("../html/paginacion_primera_buscar.html");
+			$paginacionsiguientes = file_get_contents("../html/paginacion_siguientes_buscar.html");
+
+			$paginacion = $paginacionprimera;
+			for ($i = 2; $i <= $numpaginas; $i++) {
+				$paginacion .= str_replace("##numero##", $i, $paginacionsiguientes);
+			}
+
+			// Nos centramos en la tabla de animales
+			$cadena = file_get_contents("../html/tabladatos.html");
+			$trozos = explode("##fila##", $cadena);
+
+			$aux = "";
+			$cuerpo = "";
+			while ($datos = $resultado[1]->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##nombre##", $datos["nombre"], $aux);
+				$aux = str_replace("##raza##", $datos["raza"], $aux);
+				$aux = str_replace("##edad##", $datos["edad"], $aux);
+				$aux = str_replace("##genero##", $datos["genero"], $aux);
+				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
+				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
+				$aux = str_replace("##idanimal##", $datos["idanimal"], $aux);
+				$imagen = mseleccionarimagen($datos["idanimal"]);
+				$aux = str_replace("##imagen##", $imagen, $aux);
+
+				$cuerpo .= $aux;
+			}
+
+			$cadena = $trozos[0] . $cuerpo . $trozos[2];
+			
+
+			$completo = array();
+			$completo[0] = $paginacion;
+			$completo[1] = $cadena;
+
+			echo json_encode($completo);
+
+		} else {
+			if ($resultado == -2) {
+				echo "No se han encontrado coincidencias con sus criterios de búsqueda.";
+			} else {
+				echo "Error consulta.";
+			}
+		}
+
+	}
+
 ?>

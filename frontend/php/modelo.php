@@ -396,5 +396,62 @@
 		}
 	}
 
+	function mdatosbusqueda() {
+		$con = conexionbasedatos();
+
+		$search = "";	
+		if (isset($_GET["search"])) {
+			$search = $_GET["search"];
+		} elseif (isset($_POST["search"])) {
+			$search = $_POST["search"];			
+		}
+
+		if (isset($_GET["pagina"])) {
+			$pagina = $_GET["pagina"];
+		} elseif (isset($_POST["pagina"])) {
+			$pagina = $_POST["pagina"];
+		} else {
+			$pagina = 1;
+		}
+
+		$numerototal = 0;
+		$res = array();
+
+		$consulta = "select count(nombre) as cuenta from animales where nombre LIKE '%{$search}%' or descripcion LIKE '%{$search}%'";
+
+		if ($resultado = $con->query($consulta)) {
+			$datos = $resultado->fetch_assoc();
+			$numerototal = $datos["cuenta"];
+		} else {
+			$res[0] = -1;
+			return $res;
+		}
+
+		if ($pagina == 1) {
+			$consulta = "select idanimal, nombre, raza, edad, genero, fechaentrada, descripcion from animales join razas on animales.idraza = razas.idraza where 
+				nombre LIKE '%{$search}%' or 
+				descripcion LIKE '%{$search}%' or
+				edad LIKE '%{$search}%' or
+				raza LIKE '%{$search}%'
+				order by nombre limit 3";
+		} else {
+			$consulta = "select idanimal, nombre, raza, edad, genero, fechaentrada, descripcion from animales join razas on animales.idraza = razas.idraza where 
+				nombre LIKE '%{$search}%' or 
+				descripcion LIKE '%{$search}%' or
+				edad LIKE '%{$search}%' or
+				raza LIKE '%{$search}%'
+				order by nombre limit " . (($pagina - 1) * 3) . ", 3";
+		}
+
+		if ($resultado = $con->query($consulta)) {
+			$res[0] = $numerototal; // número total de páginas
+			$res[1] = $resultado; // contenido de la consulta
+ 			return $res;
+		} else {
+			$res[0] = -1;
+			return $res;
+		}
+	}
+
 
 ?>

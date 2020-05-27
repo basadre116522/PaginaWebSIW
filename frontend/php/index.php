@@ -60,6 +60,9 @@
 			case 1 :
 				vmostrardatos(mcargaranimales(),mmontarmenu());
 				break;
+			case 2 :
+				vmostrardatosbusqueda(mdatosbusqueda());
+				break;
 			default:
 				vmostrarpaginaanimales(mcargarrazas());
 				break;
