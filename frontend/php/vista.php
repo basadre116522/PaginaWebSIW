@@ -15,13 +15,13 @@
 	function vmontarcabecera($cadena/*, $listadorazas*/) {
 		$cabecera = file_get_contents("../html/cabecera.html");
 		if (isset($_SESSION["usuario"]) and isset($_SESSION["password"])) {
-			$botones = file_get_contents("../html/botonessalir.html");
+			$botones = file_get_contents("../html/botonesusuarioregistrado.html");
 			$cabecera = str_replace("##botones##", $botones, $cabecera);
 		} else {
 			$botones = file_get_contents("../html/botonesentrar.html");
 			$cabecera = str_replace("##botones##", $botones, $cabecera);
 		}
-		/*$trozos = explode("##fila##", $cabecera);
+		/*$trozos = explode("##fila", $cabecera);
 
 		$aux = "";
 		$cuerpo = "";
@@ -52,6 +52,13 @@
 
 		return $trozos[0] . $cuerpo . $trozos[2];
 
+	}
+
+
+	function vmontarmenumensajes($cadena) {
+		$menu = file_get_contents("../html/menumensajes.html");
+		$cadena = str_replace("##menu##", $menu, $cadena);
+		return $cadena;
 	}
 	
 	function vmostrarmensaje($titulo, $subtitulo, $texto) {
@@ -260,7 +267,13 @@
 	function vmostrarredactarmensaje() {
 		$cadena = file_get_contents("../html/redactarmensaje.html");
 		$cadena = vmontarcabecera($cadena);
-		$cadena = str_replace("##idanimal##", $_GET["idanimal"], $cadena);
+		$cadena = vmontarmenumensajes($cadena);
+		if (isset($_GET["idanimal"])){
+			$cadena = str_replace("##idanimal##", $_GET["idanimal"], $cadena);
+		} else {
+			$cadena = str_replace("##idanimal##", "", $cadena);
+
+		}
 		echo $cadena;		
 	}
 
@@ -285,6 +298,7 @@
 		if (is_object($resultado)) {
 			$cadena = file_get_contents("../html/mostrarmensaje.html");
 			$cadena = vmontarcabecera($cadena);
+			$cadena = vmontarmenumensajes($cadena);
 			
 			while ($datos = $resultado->fetch_assoc()) {
 				$cadena = str_replace("##asunto##", $datos["asunto"], $cadena);
@@ -310,17 +324,15 @@
 		if (is_object($resultado)) {
 			$cadena = file_get_contents("../html/mostrarmensaje.html");
 			$cadena = vmontarcabecera($cadena);
+			$cadena = vmontarmenumensajes($cadena);
 			
 			while ($datos = $resultado->fetch_assoc()) {
-				print_r($datos);
 				$cadena = str_replace("##asunto##", $datos["asunto"], $cadena);
 				$cadena = str_replace("##corresponsal##", $datos["usuario"], $cadena);
 				$cadena = str_replace("##fecha##", $datos["fecha"], $cadena);
 				$cadena = str_replace("##hora##", $datos["hora"], $cadena);
 				$cadena = str_replace("##destinatario##", $_SESSION["usuario"], $cadena);
 				$cadena = str_replace("##mensaje##", $datos["mensaje"], $cadena);
-				$cadena = str_replace("##animal##", $datos["nombre"], $cadena);
-				$cadena = str_replace("##idanimal##", $datos["idanimal"], $cadena);
 			}
 
 			echo $cadena;
@@ -335,6 +347,7 @@
 		if (is_object($resultado)) {
 			$cadena = file_get_contents("../html/listadomensajesenviados.html");
 			$cadena = vmontarcabecera($cadena);
+			$cadena = vmontarmenumensajes($cadena);
 
 			$trozos = explode("##fila##", $cadena);
 			$cuerpo = "";
@@ -360,6 +373,7 @@
 		if (is_object($resultado)) {
 			$cadena = file_get_contents("../html/listadomensajesrecibidos.html");
 			$cadena = vmontarcabecera($cadena);
+			$cadena = vmontarmenumensajes($cadena);
 			
 			$trozos = explode("##fila##", $cadena);
 			$cuerpo = "";

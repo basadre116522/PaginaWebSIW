@@ -130,7 +130,7 @@
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}
-	}
+	} 
 
 
 

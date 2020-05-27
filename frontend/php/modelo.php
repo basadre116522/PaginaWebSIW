@@ -303,7 +303,6 @@
 						left join animales on animales.idanimal = mensajes.idanimal
 						where usuarios.usuario = '$usuario' and mensajes.recibido = 0
 						order by fecha, hora desc";
-		echo $consulta;
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
 		} else {
@@ -357,7 +356,7 @@
 				$hora = date('H:i:s');
 				$fecha = date('Y-m-d');
 				$consulta = "insert into mensajes (idanimal,idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
-				VALUES ('$idanimal','$idusuario', '$mensaje', '0', '$asunto', '$fecha', '$hora', '1');";
+				VALUES ('$idanimal','$idusuario', '$mensaje', '100', '$asunto', '$fecha', '$hora', '1');";
 				if ($resultado = $con->query($consulta)) {
 					return 1;
 				} else {
