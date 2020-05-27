@@ -453,4 +453,72 @@
 	}
 
 
+	function mcargarposts() {
+		$con = conexionbasedatos();
+
+		if (isset($_GET["pagina"])) {
+			$pagina = $_GET["pagina"];
+		} elseif (isset($_POST["pagina"])) {
+			$pagina = $_POST["pagina"];
+		} else {
+			$pagina = 1;
+		}
+
+		$numerototal = 0;
+		$res = array();
+
+		$consulta = "select count(post) as cuenta from posts";
+
+		if ($resultado = $con->query($consulta)) {
+			$datos = $resultado->fetch_assoc();
+			$numerototal = $datos["cuenta"];
+		} else {
+			$res[0] = -1;
+			return $res;
+		}
+
+		if ($pagina == 1) {
+			$consulta = "select * from posts limit 3";
+		} else {
+			$consulta = "select * from posts limit " . (($pagina - 1) * 3) . ", 3";
+		}
+
+		if ($resultado = $con->query($consulta)) {
+			$res[0] = $numerototal; // número total de páginas
+			$res[1] = $resultado; // contenido de la consulta
+ 			return $res;
+		} else {
+			$res[0] = -1;
+			return $res;
+		}
+
+	}
+
+	function mdatospost() {
+		$con = conexionbasedatos();
+
+		$idpost = $_POST["idpost"];
+
+		$consulta = "select * from posts join usuariosadmin on usuariosadmin.id = posts.idadmin where idpost = '$idpost'";
+		if ($resultado = $con->query($consulta)){
+			return $resultado;
+		} else {
+			return -1;
+		}		
+	}
+
+	function mcargarcomentarios() {
+		$con = conexionbasedatos();
+
+		$idpost = $_POST["idpost"];
+		$consulta = "select * from comentarios join usuarios on usuarios.id = comentarios.idusuario where idpost = '$idpost'";
+		if ($resultado = $con->query($consulta)){
+			return $resultado;
+		} else {
+			return -1;
+		}	
+
+	}
+
+
 ?>

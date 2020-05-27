@@ -1,0 +1,189 @@
+body {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-family: Bradley Hand, cursive;
+}
+
+@font-face {
+	font-family: 'Crimes Times Roman';
+	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
+}
+
+h1 {
+	font-size: 40px;
+	display: inline-block;
+	margin-right: 150px;
+	margin-left: 10px;
+	font-family: Crimes Times Roman;
+}
+
+h2,h3 {
+	margin-left: 15px;
+	font-family: Crimes Times Roman;
+}
+
+h3 {
+	margin-left: 150px;
+}
+
+#botones {
+	display: inline-block;
+	float: right;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	margin-top: 10px;
+	margin-right: 50px;
+}
+
+button {
+	background-color: #809629;
+	padding: 10px;
+	margin: 20px;
+	margin-right: 0;
+	margin-left: 0;
+	display: inline-block;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #000000;
+	font-family: 'Crimes Times Roman';
+}
+
+button:hover {
+	background-color: #a2b84b;
+}
+
+#fondo-portada {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+nav.horizontal-menu {
+	width: 100%;
+	padding: 0;
+	margin: -4px;
+	border: 0;
+}
+
+ul#menuprincipal {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	justify-content: center;
+	color: black;
+	display: inline-block;	
+}
+
+li.menuprincipal {
+	background-color: #809629;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Crimes Times Roman';
+	width: 17.4%;
+	float: left;
+	padding: 5px;
+	border-top: 0;
+	margin: 0;
+	color: black;
+	display: inline-block;
+}
+
+li.menuprincipal a {
+	color: black;
+    text-decoration: inherit;
+	text-decoration-style: none;
+	display: block;	
+}
+
+li.menuprincipal:hover {
+	background-color: #a2b84b;
+}
+
+#submenu {
+	width: 17.3%;
+	position: absolute;
+	display: none;
+}
+
+li.submenu {
+	background-color: #809629;
+	text-align: left;
+	color: black;
+	width: 95%;
+	display: block;
+	padding: 5px;
+	border: 0;
+	margin: 0;
+	margin-left: -39px;
+}
+
+main {
+	width: 75%;
+	float: left;
+	display: inline-block;
+}
+
+div#quienessomos {
+	margin: 20px;
+	padding: 20px;
+	border: 20px;
+	display: inline-block;
+	border: 1px solid black;
+	background-color: rgba(255,255,255,0.3);
+}
+
+h4 {
+	display: inline;
+}
+
+
+
+#post {
+	display: inline-block;
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid black;
+	width: 70%;
+	margin-left: 10%;
+	margin-right: 15%;
+	background-color: rgba(255,255,255,0.3);
+}
+
+
+#comentarios {
+	display: inline-block;
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid black;
+	width: 30%;
+	margin-left: 30%;
+	margin-right: 30%;
+	background-color: rgba(255,255,255,0.3);
+}
+
+aside {
+	width: 20%;
+	float: left;
+	padding: 10px;
+	margin-top: 20px;
+	border: 1px solid black;
+	background-color: rgba(255,255,255,0.3);
+}
+
+
+#comentario {
+	width: 60%;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+#comentar {
+	text-align: center;
+}
+
+h4 {
+	display: inline;
+}

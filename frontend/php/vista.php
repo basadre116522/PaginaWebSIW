@@ -134,7 +134,7 @@
 		}
 	}
 
-	function vmostrardatos($resultado, $resultado2){
+	function vmostrardatosanimales($resultado, $resultado2){
 		if ($resultado[0] >= 0) {
 			//Nos centramos en la paginas
 			$numpaginas = intdiv($resultado[0],3);
@@ -451,6 +451,90 @@
 			}
 		}
 
+	}
+
+	function vmostrarblog() {
+		$cadena = file_get_contents("../html/blog.html");
+		echo vmontarcabecera($cadena);
+	}
+
+	function vmostrardatosblog($resultado) {
+		if ($resultado[0] >= 0) {
+			//Nos centramos en la paginas
+			$numpaginas = intdiv($resultado[0],3);
+			$resto = $resultado[0] % 3;
+
+			if ($resto > 0) {
+				$numpaginas ++;
+			}
+
+			$paginacionprimera = file_get_contents("../html/paginacion_primera_blog.html");
+			$paginacionsiguientes = file_get_contents("../html/paginacion_siguientes_blog.html");
+
+			$paginacion = $paginacionprimera;
+			for ($i = 2; $i <= $numpaginas; $i++) {
+				$paginacion .= str_replace("##numero##", $i, $paginacionsiguientes);
+			}
+
+			// Nos centramos en la tabla de posts
+			$cadena = file_get_contents("../html/tabladatos_blog.html");
+			$trozos = explode("##fila##", $cadena);
+
+			$aux = "";
+			$cuerpo = "";
+			while ($datos = $resultado[1]->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##titulo##", $datos["titulo"], $aux);
+				$aux = str_replace("##post##", $datos["post"], $aux);
+				$aux = str_replace("##idpost##", $datos["idpost"], $aux);
+
+				$cuerpo .= $aux;
+			}
+
+			$cadena = $trozos[0] . $cuerpo . $trozos[2];
+			
+
+			$completo = array();
+			$completo[0] = $paginacion;
+			$completo[1] = $cadena;
+
+			echo json_encode($completo);
+
+		} else {
+			echo "Error en la consulta.";
+		}		
+	}
+
+	function vmostrarpost($resultado1, $resultado2) {
+
+		$cadena = file_get_contents("../html/mostrarpost.html");
+		$cadena = vmontarcabecera($cadena);
+
+		if (is_object($resultado2) and is_object($resultado1)) {
+
+			while ($datos = $resultado2->fetch_assoc()) {
+				$cadena = str_replace("##titulo##", $datos["titulo"], $cadena);
+				$cadena = str_replace("##post##", $datos["post"], $cadena);
+				$cadena = str_replace("##autor##", $datos["usuario"], $cadena);
+			}
+			$trozos = explode("##fila##", $cadena);
+
+			$aux = "";
+			$cuerpo = "";
+			while ($datos = $resultado1->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##usuario##", $datos["usuario"], $aux);
+				$aux = str_replace("##comentario##", $datos["comentario"], $aux);
+				$aux = str_replace("##idpost##", $datos["idpost"], $aux);
+
+				$cuerpo .= $aux;
+			}
+
+			$cadena = $trozos[0] . $cuerpo . $trozos[2];
+			echo $cadena;
+		} else {
+			echo "Error en la consulta";
+		} 
 	}
 
 ?>

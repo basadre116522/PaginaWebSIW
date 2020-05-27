@@ -58,7 +58,7 @@
 	} elseif ($accion == "listado") {
 		switch ($id) {
 			case 1 :
-				vmostrardatos(mcargaranimales(),mmontarmenu());
+				vmostrardatosanimales(mcargaranimales(),mmontarmenu());
 				break;
 			case 2 :
 				vmostrardatosbusqueda(mdatosbusqueda());
@@ -130,7 +130,22 @@
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}
-	} 
+	} elseif ($accion == "blog") {
+		switch ($id) {
+			case 1 :
+				vmostrardatosblog(mcargarposts());
+				break;
+			default:
+				vmostrarblog();
+				break;
+		}
+	} elseif ($accion == "mostrarpost") {
+		switch ($id) {
+			case 1 :
+				vmostrarpost(mcargarcomentarios(), mdatospost());
+				break;
+		}	
+	}
 
 
 

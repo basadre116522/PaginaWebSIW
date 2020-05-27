@@ -1,0 +1,204 @@
+@font-face {
+	font-family: 'Crimes Times Roman';
+	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-family: Bradley Hand, cursive;
+}
+
+h2 {
+	padding: 20px;
+	clear: both;
+	font-family: Crimes Times Roman;
+}
+
+h3 {
+	font-family: Crimes Times Roman;
+}
+
+#menu {
+	float: left;
+	margin: 10px;
+}
+
+#menunav {
+	padding: 10px;
+	margin: 10px;
+}
+
+#menunav ul {
+	list-style-type: none;
+}
+
+#menunav ul li{
+	border: 1px solid black;
+	display: block;
+}
+
+#menunav ul li a{
+	padding: 10px;
+	text-decoration: none;
+	display: block;
+}
+
+#blog {
+	float: left;
+	display: block;
+	width: 60%;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+#unpost {
+	display: inline-block;
+	padding: 10px;
+	margin: 20px;
+	border: 1px solid black;
+	width: 100%;
+	background-color: rgba(255,255,255,0.3);
+}
+
+#paginacion {
+	text-align: center;
+	clear: both;
+	margin-bottom: 100px;
+}
+
+
+
+h1 {
+	font-size: 40px;
+	display: inline-block;
+	margin-right: 150px;
+	margin-left: 10px;
+	font-family: Crimes Times Roman;
+}
+
+#botones {
+	display: inline-block;
+	float: right;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	margin-top: 10px;
+	margin-right: 50px;
+}
+
+button {
+	background-color: #809629;
+	padding: 10px;
+	margin: 20px;
+	margin-right: 0;
+	margin-left: 0;
+	display: inline-block;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #000000;
+	font-family: 'Crimes Times Roman';
+}
+
+button:hover {
+	background-color: #a2b84b;
+}
+
+#fondo-portada {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+nav.horizontal-menu {
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin: -4px;
+	border: 0;
+}
+
+ul#menuprincipal {
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	justify-content: center;
+	color: black;
+}
+
+li.menuprincipal {
+	background-color: #809629;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Crimes Times Roman';
+	width: 17.4%;
+	display: inline;
+	float: left;
+	padding: 5px;
+	border-top: 0;
+	margin: 0;
+	color: black;
+}
+
+li.menuprincipal a {
+	color: black;
+    text-decoration: inherit;
+	text-decoration-style: none;
+	display: block;	
+}
+
+li.menuprincipal:hover {
+	background-color: #a2b84b;
+}
+
+
+#submenu {
+	width: 17.3%;
+	position: absolute;
+	display: none;
+}
+
+li.submenu {
+	background-color: #809629;
+	text-align: left;
+	color: black;
+	width: 95%;
+	display: block;
+	padding: 5px;
+	border: 0;
+	margin: 0;
+	margin-left: -39px;
+}
+
+#textopost {
+	display: inline-block;
+	width: 50%;
+	padding: 10px;
+	padding-top: 0;
+	margin-left: 10px;
+}
+
+figure {
+	width: 40%;
+	height: 100%;
+	display: inline-block;
+	float: right;
+	margin-left: 0;
+}
+
+#buscar {
+	display: inline-block;
+}
+
+#buscador {
+	display: inline-block;
+	float: right;
+}
+
+#entrada {
+	width: 60%;
+	margin-left: 17%;
+}

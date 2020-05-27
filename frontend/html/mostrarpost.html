@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Post</title>
+    <link rel="stylesheet" href="../css/mostrarpost.css" > 
+</head>
+<body background="../imagenes/fondo7.jpg">
+    <div id=cabecera>##cabecera##</div>
+    <h2>POST</h2>
+    <div id="post">
+        <h3>##titulo##</h3>
+        <div>Autor: ##autor##</div><br>
+        <div>##post##</div><br>
+    </div>
+    <form id="comentar" method="post" action="index.php">
+        <textarea id="comentario" cols="50" rows="5"></textarea>
+        <input type="hidden" name="accion" value="comentar">
+        <input type="hidden" name="id" value="1">
+        <button type="submit">Dejar Comentario</button>
+    </form>
+    <h3>COMENTARIOS</h3>
+    <div id="comentarios">
+        ##fila##
+            <h4>##usuario##</h4> ha comentado
+            <div>##comentario##</div>
+        ##fila##
+    </div>
+</body>
+</html>
