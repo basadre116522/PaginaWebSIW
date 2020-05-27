@@ -1,6 +1,6 @@
 <?php
 	$con = mysqli_connect("localhost", "root", "", "db_grupo35");
-	$idanimal = $_POST["idanimal"];
+	$idanimal = $_GET["idanimal"];
 	$trozos = explode("/", $_FILES["file"]["type"]);
 	$tipo = strstr($_FILES["file"]["name"], ".");
 	$dir = "../imagenes";

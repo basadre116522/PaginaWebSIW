@@ -22,6 +22,31 @@
 		echo $cadena;
 	}
 
+	function vmostrarlogin() {
+		echo file_get_contents("../html/login.html");
+	}
+	
+	function vmostrarresultadologin($resultado) {
+		// si da error hacer que te mande nuevo al login directamnete 
+		$cadena = file_get_contents("../html/login.html");
+		$cadena = vmontarmenu($cadena);
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				break; 
+			case '-1' :
+				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+				break; 
+		}	
+		
+	}
+
 	function vmostraraltaraza() {
 		$cadena = file_get_contents("../html/altaraza.html");
 		$cadena = vmontarmenu($cadena);
@@ -355,10 +380,41 @@
 				break; 
 		}		
 	}
-	
-	function vmostrarlistadoanimales($resultado) {
+
+	function vmostraraltapost() {
+		$cadena = file_get_contents("../html/altapost.html");
+		$cadena = vmontarmenu($cadena);
+		echo $cadena;		
+	}
+
+	/******************************
+	Función encargada de mostrar resultado alta post
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+		-2 --> Si un post con el mismo título ya existe
+	*******************************/
+	function vmostrarresultadoaltapost($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de posts", "Alta de post", "Se ha dado de alta el post correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de posts", "Alta de post", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1111");
+				break; 
+			case '-2' :
+				vmostrarmensaje("Gestión de posts", "Alta de post", "Ya existe un post con ese título.");
+				break; 
+			case '-3' :
+				vmostrarmensaje("Gestión de posts", "Alta de post", "Ya existe un post con ese contenido.");
+				break; 
+		}
+	}
+
+
+	function vmostrarlistadopostsbym($resultado) {
 		if (is_object($resultado)) {
-			$cadena = file_get_contents("../html/listadoanimales.html");
+			$cadena = file_get_contents("../html/bympost.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$trozos = explode("##fila##", $cadena);
@@ -366,58 +422,191 @@
 			$aux = "";
 			while ($datos = $resultado->fetch_assoc()) {
 				$aux = $trozos[1];
-				$aux = str_replace("##nombre##", $datos["nombre"], $aux);
-				$aux = str_replace("##edad##", $datos["edad"], $aux);
-				$aux = str_replace("##genero##", $datos["genero"], $aux);
-				$aux = str_replace("##fechaentrada##", $datos["fechaentrada"], $aux);
-				$aux = str_replace("##descripcion##", $datos["descripcion"], $aux);
-				$aux = str_replace("##raza##", $datos["raza"], $aux);
-				$imagenes_array = mlistadoimagenes($datos["idanimal"]);
-				$i = 0;
-				$dir= '../imagenes';
-				foreach($imagenes_array as $img){
-					$target_path = $dir.'/'.$img;
-					$imagenes_array[$i] = "<a href='".$target_path."'>".$img."</a>";
-					$i++;
-				}
-				$imagenes = implode(" ", $imagenes_array);
-				$aux = str_replace("##imagenes##", $imagenes, $aux);
-
+				$aux = str_replace("##idpost##", $datos["idpost"], $aux);
+				$aux = str_replace("##titulo##", $datos["titulo"], $aux);
+				$aux = str_replace("##post##", $datos["post"], $aux);
+				$aux = str_replace("##idadmin##", $datos["idadmin"], $aux);
 				$cuerpo .= $aux;
 			}
 
 			echo $trozos[0] . $cuerpo . $trozos[2];
 		} else {
 			if ($resultado == -1) {
-				vmostrarmensaje("Gestión de animales", "Listado", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1128");
+				vmostrarmensaje("Gestión de posts", "Baja y modificación de post", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1121");
+			}
+		}		
+	}
+
+	/******************************
+	Función encargada de mostrar modificar un post
+	Recibe
+		Datos de una post
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarmodificarpost($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/modificarpost.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$datos = $resultado -> fetch_assoc();
+			$cadena = str_replace("##idpost##", $datos["idpost"], $cadena);
+			$cadena = str_replace("##titulo##", $datos["titulo"], $cadena);
+			$cadena = str_replace("##post##", $datos["post"], $cadena);
+			echo $cadena;
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de posts", "Modificar post", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1113");
 			}
 		}
 	}
 
-	function vmostrarlogin() {
-		echo file_get_contents("../html/login.html");
-	}
-	
-	function vmostrarresultadologin($resultado) {
-		// si da error hacer que te mande nuevo al login directamnete 
-		$cadena = file_get_contents("../html/login.html");
-		$cadena = vmontarmenu($cadena);
+
+	function vmostrarresultadomodificarpost($resultado) {
 		switch ($resultado) {
 			case '1':
-				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
+				vmostrarmensaje("Gestión de posts", "Modificar de post", "Se ha modificado el post correctamente.");
 				break;
 			case '-1' :
-				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				vmostrarmensaje("Gestión de animales", "Modificar de animal", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1124");
 				break; 
 			case '-2' :
-				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				vmostrarmensaje("Gestión de posts", "Modificar de post", "Ya existe un post con ese título.");
 				break; 
-			case '-1' :
-				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+			case '-3' :
+				vmostrarmensaje("Gestión de posts", "Modificar de post", "Ya existe un post con ese contenido.");
 				break; 
-		}	
-		
+		}
+
 	}
+
+
+	function vmostrareliminarpost($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/eliminarpost.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$datos = $resultado -> fetch_assoc();
+			$cadena = str_replace("##titulo##", $datos["titulo"], $cadena);
+			$cadena = str_replace("##post##", $datos["post"], $cadena);
+			$cadena = str_replace("##idpost##", $datos["idpost"], $cadena);
+
+			echo $cadena;
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de posts", "Eliminar post", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1116");
+			}
+		}
+
+	}
+
+
+	function vmostrarresultadoeliminarpost($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de posts", "Eliminar post", "Se ha eliminado el post correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de posts", "Eliminar post", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1116");
+				break; 
+		}
+	}
+
+
+	/******************************
+	Función encargada de mostrar si han sido correctamente exportados los datos de posts a json
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadoexportjsonpost($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de posts", "Exportacion a json", "Se ha formado el fichero json correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de posts", "Exportacion a json", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1231");
+				break; 
+		}
+	}
+
+
+	function vmostrarlistadocomentariosbaja($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/bcomentarios.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$trozos = explode("##fila##", $cadena);
+			$cuerpo = "";
+			$aux = "";
+			while ($datos = $resultado->fetch_assoc()) {
+				$aux = $trozos[1];
+				$aux = str_replace("##idcomentario##", $datos["idcomentario"], $aux);
+				$aux = str_replace("##comentario##", $datos["comentario"], $aux);
+				$aux = str_replace("##idpost##", $datos["idpost"], $aux);
+				$aux = str_replace("##idusuario##", $datos["idusuario"], $aux);
+				$cuerpo .= $aux;
+			}
+
+			echo $trozos[0] . $cuerpo . $trozos[2];
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de comentarios", "Baja de comentarios", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1121");
+			}
+		}
+
+	}
+
+
+	function vmostrareliminarcomentario($resultado) {
+		if (is_object($resultado)) {
+			$cadena = file_get_contents("../html/eliminarcomentario.html");
+			$cadena = vmontarmenu($cadena);
+			
+			$datos = $resultado -> fetch_assoc();
+			$cadena = str_replace("##idcomentario##", $datos["idcomentario"], $cadena);
+			$cadena = str_replace("##comentario##", $datos["comentario"], $cadena);
+			$cadena = str_replace("##idpost##", $datos["idpost"], $cadena);
+			$cadena = str_replace("##idusuario##", $datos["idusuario"], $cadena);
+
+			echo $cadena;
+		} else {
+			if ($resultado == -1) {
+				vmostrarmensaje("Gestión de comentarios", "Eliminar comentario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1116");
+			}
+		}
+
+	}
+
+
+	function vmostrarresultadoeliminarcomentario($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de comentarios", "Eliminar comentario", "Se ha eliminado el comentario correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de comentarios", "Eliminar comentario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1116");
+				break; 
+		}
+	}
+
+
+	/******************************
+	Función encargada de mostrar si han sido correctamente exportados los datos de comentarios a json
+	Recibe
+		1 --> Si se ha dado de alta correctamente
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadoexportjsoncomentario($resultado) {
+		switch ($resultado) {
+			case '1':
+				vmostrarmensaje("Gestión de posts", "Exportacion a json", "Se ha formado el fichero json correctamente.");
+				break;
+			case '-1' :
+				vmostrarmensaje("Gestión de posts", "Exportacion a json", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1231");
+				break; 
+		}
+	}
+
 	
 	function vmostrarlistadomensajesenviados($resultado) {
 		if (is_object($resultado)) {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminAFYCA</title>
+  <link rel="stylesheet" href="../css/altapost.css">
+</head>
+<body>
+	<div id="divmenu" class="divmenu">
+      ##menu##
+    </div>
+  <main>
+  	  <div>
+		<h3>Alta de post</h3>
+	  </div>
+	  <div>
+	  <form role="form" method="post" action="index.php">
+		  <div>
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" placeholder="Introduce el título del post" name="titulo" required><br>
+            <label for="post">Post</label><br>
+            <textarea id="post" name="post" placeholder="Contenido del post" cols="50" rows="10" required></textarea>
+            <input type="hidden" name="accion" value="altapost">
+            <input type="hidden" name="id" value="2">
+		  </div>
+		  <div>
+		    <button type="submit">Enviar</button>
+		  </div>
+	  </form>
+	</div>
+	</main>
+</body>
+</html>

@@ -5,6 +5,53 @@
 		return $dblink;
 	}
 
+	function mvalidarlogin() {
+		$con = conexionbasedatos();
+
+		$usuario = $_POST["usuario"];
+		$password = md5($_POST["password"]);
+		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				if ($password == $datos["password"]) {
+					$_SESSION["usuario"] = $usuario;
+					$_SESSION["password"] = $password;
+					return 1; // todo ok
+				} else {
+					return -3; //se ha introducido mal la contraseña
+				}
+			} else {
+				return -2; //no existe usuario
+			}
+		} else {
+			return -1;
+		}
+	}
+
+
+	function mcomprobarusuariosesion() {
+		$con = conexionbasedatos();
+
+		$usuario = $_SESSION["usuario"];
+		$password = $_SESSION["password"];
+
+		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				if ($password == $datos["password"]) {
+					return 1; // todo ok
+				} else {
+					return -3; //se ha introducido mal la contraseña
+				}
+			} else {
+				return -2; //no existe usuario
+			}
+		} else {
+			return -1;
+		}
+		
+	}
+
 
 	/******************************
 	Función encargada de dar de alta una raza
@@ -352,23 +399,122 @@
 		}
 	}
 
-	function mvalidarlogin() {
+	function mvalidaraltapost() {
 		$con = conexionbasedatos();
 
-		$usuario = $_POST["usuario"];
-		$password = md5($_POST["password"]);
-		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		$titulo = $_POST["titulo"];
+		$post = $_POST["post"];
+		$usuarioadmin = $_SESSION["usuario"];
+
+		$consulta = "select id from usuariosadmin where usuario='$usuarioadmin'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
-				if ($password == $datos["password"]) {
-					$_SESSION["usuario"] = $usuario;
-					$_SESSION["password"] = $password;
-					return 1; // todo ok
-				} else {
-					return -3; //se ha introducido mal la contraseña
-				}
+				$idusuarioadmin = $datos["id"];
+			}
+		} else {
+			return -1;
+		}
+
+		$consulta = "select titulo from posts where titulo = '$titulo'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				return -2;
+			}
+		} else {
+			return -1;
+		}
+
+		$consulta = "select post from posts where post = '$post'";
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				return -3;
+			}
+		} else {
+			return -1;
+		}
+
+		$consulta = "insert into posts (titulo, post, idadmin) values ('$titulo', '$post', '$idusuarioadmin')";
+		if ($resultado = $con->query($consulta)) {
+			return 1;
+		} else {
+			echo "hey";
+			return -1;
+		}
+
+	}
+
+	function mlistadoposts() {
+		$con = conexionbasedatos();
+
+		$consulta = "select * from posts order by idpost";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+
+	}
+
+
+	/******************************
+	Función encargada de coger un post
+	Devuelve
+		Datos de un post
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mdatospost() {
+		$con = conexionbasedatos();
+
+		$idpost = $_GET["idpost"];
+		
+		$consulta = "select * from posts where idpost='$idpost'";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+	}
+
+
+	/******************************
+	Función encargada de coger un post
+	Devuelve
+		Datos de un post
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function mvalidarmodificarpost() {
+		$con = conexionbasedatos();
+	
+		$idpost = $_POST["idpost"];	
+		$titulo = $_POST["titulo"];
+		$post = $_POST["post"];
+
+		$consulta = "select titulo, post from posts where titulo = '$titulo' and idpost != '$idpost'";
+
+		if ($resultado = $con->query($consulta)) {
+			if ($datos = $resultado->fetch_assoc()) {
+				return -2;
 			} else {
-				return -2; //no existe usuario
+
+				$consulta = "select titulo, post from posts where post = '$post' and idpost != '$idpost'";
+
+				if ($resultado = $con->query($consulta)) {
+					if ($datos = $resultado->fetch_assoc()) {
+						return -3;
+					} else {
+						$consulta = "update posts set titulo = '$titulo', post = '$post' where idpost = '$idpost'";
+
+						if ($resultado = $con->query($consulta)) {
+							return 1;
+						} else {
+							return -1;
+						}				
+					}
+				} else {
+					return -1;
+				}
 			}
 		} else {
 			return -1;
@@ -376,28 +522,75 @@
 	}
 
 
-	function mcomprobarusuariosesion() {
+	function meliminarpost() {
 		$con = conexionbasedatos();
 
-		$usuario = $_SESSION["usuario"];
-		$password = $_SESSION["password"];
+		$idpost = $_POST["idpost"];
 
-		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		$consulta = "delete from comentarios where idpost = '$idpost'";
+			
 		if ($resultado = $con->query($consulta)) {
-			if ($datos = $resultado->fetch_assoc()) {
-				if ($password == $datos["password"]) {
-					return 1; // todo ok
-				} else {
-					return -3; //se ha introducido mal la contraseña
-				}
+
+			$consulta = "delete from posts where idpost = '$idpost'";
+			
+			if ($resultado = $con->query($consulta)) {
+				return 1;
 			} else {
-				return -2; //no existe usuario
+				return -1;
 			}
 		} else {
 			return -1;
 		}
 		
 	}
+
+
+	function mlistadocomentarios() {
+		$con = conexionbasedatos();
+
+		$consulta = "select * from comentarios";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+
+	}
+
+
+	function mdatoscomentario() {
+		$con = conexionbasedatos();
+
+		$idcomentario = $_GET["idcomentario"];
+		
+		$consulta = "select * from comentarios where idcomentario='$idcomentario'";
+
+		if ($resultado = $con->query($consulta)) {
+			return $resultado;
+		} else {
+			return -1;
+		}
+
+	}
+
+
+	function meliminarcomentario() {
+		$con = conexionbasedatos();
+
+		$idcomentario = $_POST["idcomentario"];
+		
+		$consulta = "delete from comentarios where idcomentario = $idcomentario";
+	
+		if ($resultado = $con->query($consulta)) {
+			return 1;
+		} else {
+			return -1;
+		}
+
+	}
+
+
 
 	/******************************
 	Función encargada de coger listado de mensajes recibidos
@@ -684,6 +877,70 @@
 				}
 				
 				$file = '../json/razas.json';
+				file_put_contents($file, json_encode($data));
+
+			} else {
+				return -1;
+			}
+			return 1;
+	}
+
+	function mexportjsonpost(){
+		$con = conexionbasedatos();
+
+		//generamos la consulta
+		
+		$consulta = "select * from posts";
+		
+			if($result = $con->query($consulta)){
+				$data = array(); //creamos un array
+		
+				//guardamos en un array multidimensional todos los datos de la consulta
+				$i=0;
+			
+				while($row = $result->fetch_array())
+				{
+					$data[$i] = $row;
+					unset($data[$i]["0"]);
+					unset($data[$i]["1"]);
+					unset($data[$i]["2"]);
+					unset($data[$i]["3"]);
+					$i++;
+				}
+				
+				$file = '../json/posts.json';
+				file_put_contents($file, json_encode($data));
+
+			} else {
+				return -1;
+			}
+			return 1;
+	}
+
+	function mexportjsoncomentario(){
+		$con = conexionbasedatos();
+
+		//generamos la consulta
+		
+		$consulta = "select * from comentarios";
+		
+			if($result = $con->query($consulta)){
+				$data = array(); //creamos un array
+		
+				//guardamos en un array multidimensional todos los datos de la consulta
+				$i=0;
+			
+				while($row = $result->fetch_array())
+				{
+					$data[$i] = $row;
+					unset($data[$i]["0"]);
+					unset($data[$i]["1"]);
+					unset($data[$i]["2"]);
+					unset($data[$i]["3"]);
+					$i++;
+				}
+				
+				$file = '../json/comentarios.json';
 				file_put_contents($file, json_encode($data));
 
 			} else {

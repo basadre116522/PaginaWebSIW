@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminAFYCA</title>
+  <link rel="stylesheet" href="../css/eliminarpost.css">
+</head>
+<body>
+	<div id="divmenu" class="divmenu">
+      ##menu##
+    </div>
+  <main>
+  	  <div>
+		<h3>Eliminar post</h3>
+	  </div>
+	  <div>
+	  <form role="form" method="post" action="index.php">
+		  <div class="form-group">
+		    <label for="titulo">Título: ##titulo##</label><br>
+		    <label for="post">Post: ##post##</label><br>
+		    <input type="hidden" name="accion" value="bympost">
+		    <input type="hidden" name="id" value="5">
+            <input type="hidden" name="idpost" value="##idpost##">
+		  </div>
+		  <div>
+		    <button type="submit">Eliminar</button>
+		  </div>
+	  </form>
+	</div>
+	</main>
+</body>
+</html>

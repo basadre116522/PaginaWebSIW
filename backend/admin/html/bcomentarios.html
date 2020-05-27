@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminAFYCA</title>
+  <link rel="stylesheet" href="../css/bympost.css" >
+</head>
+<body>
+    <div id="divmenu" class="divmenu">
+        ##menu##
+    </div>
+    <main>
+  	    <div>
+	        <h3>Baja y modificación de post</h3>
+	    </div>
+	    <div>
+          <table>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Comentario</th>
+              <th>IDPost</th>
+              <th>IDUsuario</th>
+              <th>Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+              ##fila##
+              <tr>
+                <td>##idcomentario##</td>
+                <td>##comentario##</td>
+                <td>##idpost##</td>
+                <td>##idusuario##</td>
+                <td><a href="index.php?accion=bajacomentario&id=2&idcomentario=##idcomentario##">Eliminar</a></td>
+              </tr>
+              ##fila##
+            </tbody>
+          </table>
+        </div>
+        <form role="form" method="post" action="index.php">
+            <div>
+                <input type="hidden" name="accion" value="bajacomentario">
+                <input type="hidden" name="id" value="4">
+            </div>
+            <div>
+                <button type="submit">Exportar como json</button>
+            </div>
+        </form>
+	</main>
+</body>
+</html>

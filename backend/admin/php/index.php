@@ -98,14 +98,6 @@
 				}
 			}
 
-			if ($accion == "listadoanimal") {
-				switch ($id) {
-					case '1': 
-						vmostrarlistadoanimales(mlistadoanimales());
-						break;
-				}
-			}
-
 			if ($accion == "bymanimal") {
 				switch ($id) {
 					case '1': 
@@ -140,6 +132,57 @@
 					case '2': 
 						vmostrarresultadocsvanimal(mleercsvanimal());
 						break;
+				}
+			}
+
+			if ($accion == "altapost") {
+				switch ($id) {
+					case '1': 
+						vmostraraltapost();
+						break;
+					case '2': 
+						vmostrarresultadoaltapost(mvalidaraltapost());
+						break;
+				}
+			}
+
+			if ($accion == "bympost") {
+				switch ($id) {
+					case '1': 
+						vmostrarlistadopostsbym(mlistadoposts());
+						break;
+					case '2': 
+						vmostrarmodificarpost(mdatospost());
+						break;
+					case '3': 
+						vmostrarresultadomodificarpost(mvalidarmodificarpost());
+						break;
+					case '4': 
+						vmostrareliminarpost(mdatospost());
+						break;
+					case '5': 
+						vmostrarresultadoeliminarpost(meliminarpost());
+						break;
+					case '6':
+						vmostrarresultadoexportjsonpost(mexportjsonpost());
+					break;
+				}
+			}
+
+			if ($accion == "bajacomentario") {
+				switch ($id) {
+					case '1': 
+						vmostrarlistadocomentariosbaja(mlistadocomentarios());
+						break;
+					case '2': 
+						vmostrareliminarcomentario(mdatoscomentario());
+						break;
+					case '3': 
+						vmostrarresultadoeliminarcomentario(meliminarcomentario());
+						break;
+					case '4':
+						vmostrarresultadoexportjsoncomentario(mexportjsoncomentario());
+					break;
 				}
 			}
 
