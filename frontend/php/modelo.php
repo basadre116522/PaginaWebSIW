@@ -346,7 +346,9 @@
 		$idanimal = $_POST["idanimal"];
 		$usuario = $_SESSION["usuario"];
 		$consulta = "select * from usuarios where usuario ='$usuario'";
-
+		if ($idanimal == ""){
+			$idanimal = "NULL";
+		}
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				$idusuario = $datos["id"];
@@ -356,7 +358,8 @@
 				$hora = date('H:i:s');
 				$fecha = date('Y-m-d');
 				$consulta = "insert into mensajes (idanimal,idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
-				VALUES ('$idanimal','$idusuario', '$mensaje', '100', '$asunto', '$fecha', '$hora', '1');";
+				VALUES ($idanimal,'$idusuario', '$mensaje', '100', '$asunto', '$fecha', '$hora', '1');";
+				echo $consulta;
 				if ($resultado = $con->query($consulta)) {
 					return 1;
 				} else {
