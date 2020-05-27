@@ -31,7 +31,7 @@
         }
     
     </script>
-    
+     <link rel="stylesheet" href="../css/mostraranimal.css" > 
     <body onload="cargaranimales('',1)" background="../imagenes/fondo7.jpg">
         <div id=cabecera>##cabecera##</div>
         <div>Nombre: ##nombre##</div>
@@ -151,5 +151,10 @@
                     <img src="##IMAGEN6##" id="imagen6" ##reemplazo6##>
                 </div>
             </div>
+			<form role="form" method="post" action="index.php?accion=redactarmensaje&id=1&idanimal=##idanimal##">
+				<div>
+				  <button type="submit">Contactar cita</button>
+				</div>
+			  </form>
         </div>
     </body>

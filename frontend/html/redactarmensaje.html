@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AdminEM</title>
+  <link rel="stylesheet" href="../css/redactarmensaje.css">
+</head>
+<body>
+	<div id="divmenu" class="divmenu">
+      ##cabecera##
+    </div>
+  <main>
+  	  <div>
+		<h3>Redactar Mensaje</h3>
+	  </div>
+	  <div>
+	  <form role="form" method="post" action="index.php">
+		  <div>
+            <label for="asunto">Asunto: </label>
+            <input type="text" class="form-control" id="asunto" placeholder="Introduce el asunto" name="asunto" required> <br> <br>
+            <textarea name="mensaje" rows="10" cols="100" required></textarea>
+            <input type="hidden" name="accion" value="redactarmensaje">
+			<input type="hidden" name="id" value="2">
+			<input type="hidden" name="idanimal" value="##idanimal##">
+			
+		  </div>
+		  <div>
+		    <button type="submit">Enviar</button>
+		  </div>
+	  </form>
+	</div>
+	</main>
+</body>
+</html>

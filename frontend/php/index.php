@@ -71,12 +71,62 @@
 				vcargarpdf(mlistadoanimales());
 				break;
 		}	
-	}elseif ($accion == "mostraranimal") {
+	} elseif ($accion == "mostraranimal") {
 		switch ($id) {
 			case 1 :
 				vmostraranimal(mgetimagenesanimal(),mdatosanimal());
 				break;
 		}	
+	} elseif ($accion == "redactarmensaje") {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			switch ($id) {
+				case 1 :
+					vmostrarredactarmensaje();
+					break;
+				case 2:
+					vmostrarresultadoredactarmensaje(malmacenarmensaje());
+					break;
+			}	
+		} else {
+			header("Location: index.php?accion=login&id=1");
+		}
+	} elseif ($accion == "mostrarmensaje") {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			switch ($id) {
+				case '1':
+					vmostrarmensajerecibido(mdatosmensaje());
+					break;
+				case '2':
+					vmostrarmensajeenviado(mdatosmensaje());
+					break;
+			}
+		} else {
+			header("Location: index.php?accion=login&id=1");
+		}
+	} elseif ($accion == "listadomensajesenviados") {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			switch ($id) {
+				case '1':
+					vmostrarlistadomensajesenviados(mlistadomensajesenviados());
+					break;
+			}
+		} else {
+			header("Location: index.php?accion=login&id=1");
+		}
+	} elseif ($accion == "listadomensajesrecibidos") {
+		$valor = mcomprobarusuariosesion();
+		if ($valor == 1) {
+			switch ($id) {
+				case '1':
+					vmostrarlistadomensajesrecibidos(mlistadomensajesrecibidos());
+					break;
+			}
+		} else {
+			header("Location: index.php?accion=login&id=1");
+		}
 	}
 
 
