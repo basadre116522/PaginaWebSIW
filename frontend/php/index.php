@@ -162,6 +162,12 @@
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}
+	} elseif ($accion == "ayuda") {
+		switch ($id) {
+			case 1 :
+				vmostrarayuda();
+				break;
+		}	
 	}
 
 

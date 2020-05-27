@@ -537,7 +537,7 @@
 						join usuarios on mensajes.idusuario = usuarios.id 
 						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
 						left join animales on animales.idanimal = mensajes.idanimal
-						where mensajes.idadmin = 0 and mensajes.recibido = 1
+						where mensajes.idadmin = 100 and mensajes.recibido = 1
 						order by fecha, hora desc";
 						
 		if ($resultado = $con->query($consulta)) {

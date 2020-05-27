@@ -77,16 +77,18 @@ ul#menuprincipal {
 	display: inline-block;	
 }
 
+
 li.menuprincipal {
 	background-color: #809629;
 	text-align: center;
 	font-size: 15px;
 	font-family: 'Crimes Times Roman';
-	width: 17.4%;
+	width: 20%;
 	float: left;
 	padding: 5px;
 	border-top: 0;
-	margin: 0;
+	margin-left: -5px;
+	margin-right: -5px;
 	color: black;
 	display: inline-block;
 }

@@ -132,14 +132,14 @@ li.menuprincipal {
 	text-align: center;
 	font-size: 15px;
 	font-family: 'Crimes Times Roman';
-	width: 16.5%;
-	display: inline;
+	width: 20%;
 	float: left;
 	padding: 5px;
 	border-top: 0;
-	margin-right: -5;
-	margin-left: -5;
+	margin-left: -5px;
+	margin-right: -5px;
 	color: black;
+	display: inline-block;
 }
 
 li.menuprincipal a {

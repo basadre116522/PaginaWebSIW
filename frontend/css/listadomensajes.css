@@ -3,7 +3,7 @@ body {
 	margin: 0;
 	border: 0;
 	font-family: Bradley Hand, cursive;
-	background-image: '../images/fondo';
+	background-image: url('../imagenes/fondo7.jpg');
 }
 
 @font-face {
@@ -74,7 +74,7 @@ li.menuprincipal {
 	text-align: center;
 	font-size: 15px;
 	font-family: 'Crimes Times Roman';
-	width: 16.6%;
+	width: 20%;
 	float: left;
 	padding: 5px;
 	border-top: 0;
@@ -142,4 +142,8 @@ td{
 	border: 0;
 	margin: 0;
 	margin-left: -39px;
+}
+
+.horizontal-menu{
+	
 }

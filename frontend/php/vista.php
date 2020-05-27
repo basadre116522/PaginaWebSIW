@@ -555,4 +555,10 @@
 
 	}
 
+	function vmostrarayuda() {
+		$cadena = file_get_contents("../html/ayuda.html");
+		$cadena = vmontarcabecera($cadena);
+		echo $cadena;		
+	}
+
 ?>
