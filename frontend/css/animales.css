@@ -195,3 +195,17 @@ img {
 	margin: 0;
 	padding: 0;
 }
+
+#buscar {
+	display: inline-block;
+}
+
+#buscador {
+	display: inline-block;
+	float: right;
+}
+
+#entrada {
+	width: 60%;
+	margin-left: 17%;
+}
