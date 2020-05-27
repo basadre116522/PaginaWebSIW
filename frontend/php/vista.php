@@ -453,4 +453,10 @@
 
 	}
 
+	function vmostrarfaqs(){
+		$cadena = file_get_contents("../html/faqs.html");
+		$cadena = vmontarcabecera($cadena);
+		echo $cadena;
+	}
+	
 ?>

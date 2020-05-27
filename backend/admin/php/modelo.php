@@ -205,48 +205,7 @@
 			$consulta = "insert into animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
 
 			if ($resultado = $con->query($consulta)) {
-				// El foreach no funciona bien, solo incluye una de las imagenes ver porque
-				foreach($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name) {
-					if($_FILES["imagenes"]["name"][$key]) {
-						$filename = $_FILES["imagenes"]["name"][$key]; //Obtenemos el nombre original del archivo
-						$source = $_FILES["imagenes"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
-						
-						$directorio = '../imagenes'; //Declaramos un  variable con la ruta donde guardaremos los archivos
-						
-						//Validamos si la ruta de destino existe, en caso de no existir la creamos
-						if(!file_exists($directorio)){
-							mkdir($directorio, 0777) or die("No se puede crear el directorio de extracci&oacute;n");	
-						}
-						
-						$dir=opendir($directorio); //Abrimos el directorio de destino
-						$target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
-						//Movemos y validamos que el archivo se haya cargado correctamente
-						//El primer campo es el origen y el segundo el destino
-						if(move_uploaded_file($source, $target_path)) {	
-							closedir($dir); 
-							$consulta = "select idanimal from animales order by idanimal desc limit 1";
-							if ($resultado = $con->query($consulta)) {
-								if ($datos = $resultado->fetch_assoc()){
-									$idanimal = $datos["idanimal"];
-									$consulta = "insert into imagenes (idanimal, imagen) value ('$idanimal','$filename')";
-									if ($resultado = $con->query($consulta)) {
-										return 1;
-									}
-									else {
-										return -4;
-									}
-								} else {
-									return -3;
-								}
-							} else {
-								return -3;
-							}
-							} else {	
-								closedir($dir); 
-								return -2;
-						}
-					}
-				}
+				return $resultado;
 			} else {
 				return -1;
 			}
@@ -302,8 +261,7 @@
 	Devuelve
 		 1 --> Si se ha realizado el alta correctamente
 		-1 --> Si hay un problema con la base de datos de animal
-		-2 --> Si hay un problema en mover las imagenes
-		-3 --> Si hay un erro al insertar los datos de las imagenes
+		-2 --> Si hay un problema al eliminar las imagenes
 	*******************************/
 	function mvalidarmodificaranimal() {
 		$con = conexionbasedatos();
@@ -326,40 +284,7 @@
 			if ($resultado = $con->query($consulta)) {
 				$consulta = "delete from imagenes where idanimal = '$idanimal' and imagen = '$imagen'";
 				if ($resultado = $con->query($consulta)){
-					foreach($_FILES["a_imagenes"]['tmp_name'] as $key => $tmp_name) {
-						if($_FILES["a_imagenes"]["name"][$key]) {
-							$filename = $_FILES["a_imagenes"]["name"][$key]; //Obtenemos el nombre original del archivo
-							$source = $_FILES["a_imagenes"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
-							
-							$directorio = '../imagenes'; //Declaramos un  variable con la ruta donde guardaremos los archivos
-							
-							//Validamos si la ruta de destino existe, en caso de no existir la creamos
-							if(!file_exists($directorio)){
-								mkdir($directorio, 0777) or die("No se puede crear el directorio de extracci&oacute;n");	
-							}
-							
-							$dir=opendir($directorio); //Abrimos el directorio de destino
-							$target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
-							//Movemos y validamos que el archivo se haya cargado correctamente
-							//El primer campo es el origen y el segundo el destino
-							if(move_uploaded_file($source, $target_path)) {	
-								closedir($dir); 
-								$consulta = "insert into imagenes (idanimal, imagen) value ('$idanimal','$filename')";
-
-								// Hay que comprobar para ello  que no exista ya la imagen para el animal porque si no da error.
-								if ($resultado = $con->query($consulta)) {
-									return 1;
-								}
-								else {
-									return -3;
-								}
-							} else {	
-								closedir($dir); 
-								return -2;
-							}
-						}
 					return 1;
-					}
 				} else {
 					return -2;
 				}
@@ -776,7 +701,6 @@
 				$descripcion = $datos[3];
 				$fechaentrada = $datos[4];
 				$raza = $datos[5];
-				$imagenes = explode(" ", $datos[6]);
 				$consulta = "select idraza from razas where raza = '$raza'";
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
@@ -787,33 +711,7 @@
 					$consulta = "insert into animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
 		
 					if ($resultado = $con->query($consulta)) {
-						foreach($imagenes as $imagen) {			
-							$directorio = '../imagenes'; //Declaramos un  variable con la ruta donde guardaremos los archivos
-								
-							//Validamos si la ruta de destino existe, en caso de no existir la creamos
-							if(!file_exists($directorio)){
-								mkdir($directorio, 0777) or die("No se puede crear el directorio de extracci&oacute;n");	
-							}
-								
-							$dir=opendir($directorio); //Abrimos el directorio de destino
-							$path = $directorio.'/'.$imagen; //Indicamos la ruta de destino, así como el nombre del archivo
-							//Comprobamos si existe la imagen para que funcione las imagenes tienen que estar en una carpeta en concreto
-							if(file_exists($path)) {	
-								closedir($dir); 
-								$consulta = "select idanimal from animales order by idanimal desc limit 1";
-								if ($resultado = $con->query($consulta)) {
-									if ($datos = $resultado->fetch_assoc()){
-										$idanimal = $datos["idanimal"];
-										$consulta = "insert into imagenes (idanimal, imagen) value ('$idanimal','$imagen')";
-										if (!$resultado = $con->query($consulta)) {
-											echo "error al insertar  la imagen $imagen en el animal $idanimal <br />";
-										}
-									}
-								} else {	
-									closedir($dir); 
-								}
-							}
-						}
+						return $resultado;
 					}
 				}		
 			}

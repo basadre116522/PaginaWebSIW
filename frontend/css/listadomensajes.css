@@ -3,6 +3,7 @@ body {
 	margin: 0;
 	border: 0;
 	font-family: Bradley Hand, cursive;
+	background-image: '../images/fondo';
 }
 
 @font-face {
@@ -73,11 +74,12 @@ li.menuprincipal {
 	text-align: center;
 	font-size: 15px;
 	font-family: 'Crimes Times Roman';
-	width: 17.4%;
+	width: 16.6%;
 	float: left;
 	padding: 5px;
 	border-top: 0;
-	margin: 0;
+	margin-left: -5px;
+	margin-right: -5px;
 	color: black;
 	display: inline-block;
 }

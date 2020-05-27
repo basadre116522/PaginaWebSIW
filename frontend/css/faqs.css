@@ -1,72 +1,15 @@
-@font-face {
-	font-family: 'Crimes Times Roman';
-	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
-}
-
 body {
 	padding: 0;
 	margin: 0;
 	border: 0;
-	font-family: Bradley Hand, cursive;
+    font-family: Bradley Hand, cursive;
+    background-image: url('../imagenes/fondo7.jpg');
 }
 
-h2 {
-	padding: 20px;
-	clear: both;
-	font-family: Crimes Times Roman;
+@font-face {
+	font-family: 'Crimes Times Roman';
+	src: url('../fuentes/CrimesOfGrindelwald-r92K.ttf');
 }
-
-h3 {
-	font-family: Crimes Times Roman;
-}
-
-#menu {
-	float: left;
-	margin: 10px;
-}
-
-#menunav {
-	padding: 10px;
-	margin: 10px;
-}
-
-#menunav ul {
-	list-style-type: none;
-}
-
-#menunav ul li{
-	border: 1px solid black;
-	display: block;
-}
-
-#menunav ul li a{
-	padding: 10px;
-	text-decoration: none;
-	display: block;
-}
-
-#animales {
-	float: left;
-	display: block;
-	width: 60%;
-}
-
-#unanimal {
-	display: inline-block;
-	padding: 10px;
-	margin: 20px;
-	border: 1px solid black;
-	width: 100%;
-	background-color: rgba(255,255,255,0.3);
-}
-
-#paginacion {
-	text-align: center;
-	clear: both;
-	margin-bottom: 100px;
-}
-
-
 
 h1 {
 	font-size: 40px;
@@ -110,7 +53,6 @@ button:hover {
 }
 
 nav.horizontal-menu {
-	display: block;
 	width: 100%;
 	padding: 0;
 	margin: -4px;
@@ -118,13 +60,13 @@ nav.horizontal-menu {
 }
 
 ul#menuprincipal {
-	display: block;
 	width: 100%;
 	padding: 0;
 	margin: 0;
 	border: 0;
 	justify-content: center;
 	color: black;
+	display: inline-block;	
 }
 
 li.menuprincipal {
@@ -132,14 +74,14 @@ li.menuprincipal {
 	text-align: center;
 	font-size: 15px;
 	font-family: 'Crimes Times Roman';
-	width: 16.5%;
-	display: inline;
+	width: 16.6%;
 	float: left;
 	padding: 5px;
 	border-top: 0;
-	margin-right: -5;
-	margin-left: -5;
+	margin-left: -5px;
+	margin-right: -5px;
 	color: black;
+	display: inline-block;
 }
 
 li.menuprincipal a {
@@ -154,12 +96,6 @@ li.menuprincipal:hover {
 }
 
 
-#submenu {
-	width: 17.3%;
-	position: absolute;
-	display: none;
-}
-
 li.submenu {
 	background-color: #809629;
 	text-align: left;
@@ -172,41 +108,36 @@ li.submenu {
 	margin-left: -39px;
 }
 
-#textoanimal {
-	display: inline-block;
-	width: 50%;
-	padding: 10px;
-	padding-top: 0;
-	margin-left: 10px;
-}
-
-figure {
-	width: 40%;
-	height: 100%;
-	display: inline-block;
-	float: right;
-	margin-left: 0;
-}
-
-img {
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	float: right;
-	margin: 0;
-	padding: 0;
-}
-
-#buscar {
+main {
+	width: 75%;
+	float: left;
 	display: inline-block;
 }
 
-#buscador {
-	display: inline-block;
-	float: right;
+.Titulo{
+    background-color: #809629;
+    font-family: 'Crimes Times Roman';
+    border-radius: 25px;
+    font-size: 30px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-left: 15%;
+    margin-right: 55%;
 }
 
-#entrada {
-	width: 60%;
-	margin-left: 17%;
+.Pregunta{
+    background-color: #809629;
+    border-radius: 25px;
+    font-family: 'Crimes Times Roman';
+    font-size: 20px;
+    padding: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+
+.texto{
+	padding: 5px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+

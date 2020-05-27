@@ -130,7 +130,14 @@
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}
-	} 
+	} else if ($accion == "faqs"){
+		switch ($id) {
+			case '1':
+				vmostrarfaqs();
+				break;
+		}
+		
+	}
 
 
 
