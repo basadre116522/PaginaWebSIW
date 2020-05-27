@@ -634,7 +634,7 @@
 		-1 --> Si hay un problema con la base de datos
 	*******************************/
 	function vmostrarsubirimagenesdropzone() {
-			$cadena = file_get_contents("../html/subirimagenesdropzone.html");
+			$cadena = file_get_contents("../html/subirImagenesdropzone.html");
 			$cadena = vmontarmenu($cadena);
 			
 			$idanimal= $_GET["idanimal"];
