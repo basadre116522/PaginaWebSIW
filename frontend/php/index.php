@@ -135,7 +135,7 @@
 			case '1':
 				vmostrarfaqs();
 				break;
-		
+		}
 	} elseif ($accion == "blog") {
 		switch ($id) {
 			case 1 :
