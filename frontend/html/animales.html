@@ -26,18 +26,38 @@
 			    }
 			});
 		}
+
+		function cargarbusqueda(pagina) {
+			$.ajax({
+				url: "index.php?accion=listado&id=2&search=" + document.getElementById("search").value + "&pagina=" + pagina,
+				type : 'POST',
+				cache: false,
+				dataType: "json",
+				success: function(result) {
+					$("#animales").html(result[1]);
+					$("#paginacion").html(result[0]);
+				},
+				error: function (request, status, error) {
+			        alert(request.responseText);
+			    }
+			});
+		}
 	</script>
 </head>
 <body onload="cargaranimales('',1)" background="../imagenes/fondo7.jpg">
 	<div id=cabecera>##cabecera##</div>
-	<h2>ANIMALES EN ADOPCION</h2><br><br>
+	<h2>ANIMALES EN ADOPCION</h2>
+	<div id="entrada">
+		<input type="text" name="search" id="search" placeholder="Buscar...">
+		<button type="button" id="buscar" onclick="cargarbusqueda(1)">Buscar</button>
+		<form id="buscador" role="form" method="post" action="index.php">
+	        <input type="hidden" name="accion" value="exportarpdf">
+	        <input type="hidden" name="id" value="1">
+	        <button type="submit">Exportar en PDF</button>
+		</form>
+	</div>
 	<aside id="menu"></aside>
-	<form role="form" method="post" action="index.php">
-        <input type="hidden" name="accion" value="exportarpdf">
-        <input type="hidden" name="id" value="1">
-        <button type="submit">Exportar en PDF</button>
-	</form>
-	<div id="animales">Aquí va la tabla de animales</div>
-	<div id="paginacion">paginación</div>
+	<div id="animales">Animales en Adopcion</div>
+	<div id="paginacion">Paginación</div>
 </body>
 </html>
