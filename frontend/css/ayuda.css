@@ -115,6 +115,7 @@ main {
     margin-left: 10%;
     margin-right: 10%;
 }
-img {
-    margin-top: 20px;
+img{
+	display:block;
+	margin:auto;
 }

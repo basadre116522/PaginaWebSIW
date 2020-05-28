@@ -43,6 +43,13 @@ h3 {
 	padding: 10px;
 	text-decoration: none;
 	display: block;
+	color: black;
+	font-family: 'Crimes Times Roman';
+	background-color: #809629;
+}
+
+#menuav ul li :hover{
+	background-color: #a2b84b;
 }
 
 #animales {
