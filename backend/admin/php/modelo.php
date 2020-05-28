@@ -375,7 +375,6 @@
 		if ($resultado = $con->query($consulta)) {
 			return 1;
 		} else {
-			echo "hey";
 			return -1;
 		}
 
@@ -674,7 +673,6 @@
 				$consulta = "select raza from final_razas where raza = '$raza'";
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
-						echo "error: la raza $raza ya existe <br/>";
 					}
 					else {
 						$consulta = "insert into final_razas (raza) values ('$raza')";
@@ -715,6 +713,7 @@
 				$fechaentrada = $datos[4];
 				$raza = $datos[5];
 				$consulta = "select idraza from final_razas where raza = '$raza'";
+				echo $consulta;
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						$idraza = $datos["idraza"];
@@ -722,9 +721,10 @@
 				}
 				if (isset($idraza)) {
 					$consulta = "insert into final_animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
-		
+					echo $consulta;
 					if ($resultado = $con->query($consulta)) {
-						return $resultado;
+					} else {
+						return -1;
 					}
 				}		
 			}
