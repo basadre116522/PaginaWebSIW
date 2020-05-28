@@ -19,6 +19,13 @@ h1 {
 	font-family: Crimes Times Roman;
 }
 
+h2 {
+	padding-top: 0;
+	padding: 20px;
+	clear: both;
+	font-family: Crimes Times Roman;
+}
+
 #botones {
 	display: inline-block;
 	float: right;
@@ -156,6 +163,7 @@ aside {
 	width: 30%;
 	font-family: 'Crimes Times Roman';
 	list-style: none;
+	text-align: center;
 	text-decoration: none;
 }
 li.menumensajes a{
@@ -169,5 +177,9 @@ li.menumensajes:hover{
 	background-color: #a2b84b;
 }
 
+#correo {
+	width: 60%;
+	margin-left: 20%;
+}
 
 

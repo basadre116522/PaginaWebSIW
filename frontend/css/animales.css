@@ -217,3 +217,7 @@ img {
 	width: 60%;
 	margin-left: 17%;
 }
+
+#menu ul li :hover{
+	background-color: #a2b84b;
+}

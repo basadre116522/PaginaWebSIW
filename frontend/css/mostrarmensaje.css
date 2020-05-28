@@ -113,12 +113,6 @@ li.submenu {
 	margin-left: -39px;
 }
 
-main {
-	width: 100%;
-	float: left;
-	display: inline-block;
-}
-
 
 th {
 	background-color: #809629;
@@ -134,6 +128,7 @@ td{
 }
 
 h2 {
+	padding-top: 0;
 	padding: 20px;
 	clear: both;
 	font-family: Crimes Times Roman;
@@ -148,6 +143,7 @@ h2 {
 	margin: 0;
 	width: 30%;
 	font-family: 'Crimes Times Roman';
+	text-align: center;
 	list-style: none;
 	text-decoration: none;
 }
@@ -169,16 +165,14 @@ li.menumensajes:hover{
 	text-align: center;
 }
 
-table {
+main {
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 10%;
+	border: 1px solid black;
+	padding: 30px;
 	padding-top: 0;
-	width: 100%;
-	margin-left: 50px;
 	margin-bottom: 100px;
-}
-
-#contenedor {
-	margin: 0;
-	width: 80%;
-	display: block;
-	text-align: center;
+	border-radius: 20px;
+  list-style-type: circle;
 }
