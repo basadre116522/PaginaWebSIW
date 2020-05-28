@@ -94,12 +94,6 @@ li.menuprincipal:hover {
 	background-color: #a2b84b;
 }
 
-#submenu {
-	width: 17.3%;
-	position: absolute;
-	display: none;
-}
-
 li.submenu {
 	background-color: #809629;
 	text-align: left;
