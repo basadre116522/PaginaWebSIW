@@ -28,6 +28,19 @@
 		}
 	}
 
+	function mvalidarlogout() {
+		$con = conexionbasedatos();
+		$usuario = $_SESSION["usuario"];
+		$password = $_SESSION["password"];
+		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		if ($resultado = $con->query($consulta)) {
+			$_SESSION["usuario"] = null;
+			$_SESSION["password"] = null;
+			return 1; // todo ok
+		} else {
+			return -1;
+		}
+	}
 
 	function mcomprobarusuariosesion() {
 		$con = conexionbasedatos();

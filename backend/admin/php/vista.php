@@ -13,6 +13,8 @@
 	function vmontarmenu($cadena) {
 		$menu = file_get_contents("../html/menu.html");
 		$cadena = str_replace("##menu##", $menu, $cadena);
+		$botones = file_get_contents("../html/botonsalir.html");
+		$cadena = str_replace("##botones##", $botones, $cadena);
 		return $cadena;
 	}
 
@@ -23,25 +25,30 @@
 	}
 
 	function vmostrarlogin() {
-		echo file_get_contents("../html/login.html");
+		$cadena = file_get_contents("../html/login.html");
+		echo $cadena;
 	}
 	
 	function vmostrarresultadologin($resultado) {
-		// si da error hacer que te mande nuevo al login directamnete 
-		$cadena = file_get_contents("../html/login.html");
-		$cadena = vmontarmenu($cadena);
+		// si da error hacer que te mande nuevo al login directamnete
 		switch ($resultado) {
 			case '1':
 				vmostrarmensaje("Login", "Login de usuario", "El login se ha realizado corretamente.");
 				break;
 			case '-1' :
-				vmostrarmensaje("Login", "Login de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				$cadena = file_get_contents("../html/login.html");
+				echo $cadena;
+				echo "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208";
 				break; 
 			case '-2' :
-				vmostrarmensaje("Login", "Login de usuario", "El usuario no existe.");
+				$cadena = file_get_contents("../html/login.html");
+				echo $cadena;
+				echo "El usuario no existe.";
 				break; 
-			case '-1' :
-				vmostrarmensaje("Login", "Login de usuario", "La contraseña es incorrecta.");
+			case '-3' :
+				$cadena = file_get_contents("../html/login.html");
+				echo $cadena;
+				echo "La contraseña es incorrecta.";
 				break; 
 		}	
 		
@@ -832,4 +839,23 @@
 			echo $cadena;
 	}
 
+	/******************************
+	Función encargada de mostrar el resultado del logout
+	Recibe
+		1 --> el logout ha sido exitoso
+		-1 --> Si hay un problema con la base de datos
+	*******************************/
+	function vmostrarresultadologout($resultado) {
+		switch ($resultado) {
+			case '1':
+				$cadena = file_get_contents("../html/login.html");
+				echo $cadena;
+				"Se ha cerrado la sesión corretamente.";
+				break;
+			case '-1' :
+				vmostrarmensaje("Logout", "Logout de usuario", "Se ha producido un error. Vuelva a intentarlo pasados unos minutos.<br>Si el problema persiste póngase en contacto con el administrador. Error: -1208");
+				break; 
+		}	
+		
+	}
 ?>

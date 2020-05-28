@@ -221,6 +221,13 @@
 					break;
 				}
 			}
+			if ($accion == "logout") {
+				switch ($id) {
+					case '1':
+						vmostrarresultadologout(mvalidarlogout());
+						break;
+				}
+			}
 		} else {
 			header("Location: index.php?accion=login&id=1");
 		}
