@@ -64,13 +64,50 @@ body {
 	margin-left: 0;
 }
 
+
+
+
 main {
 	display: inline-block;
-	padding: 20px;
 	width: 70%;
 	float: left;
-}
-form {
-	padding: 20px;
+	margin-top: 30px;
+	border: 1px solid black;
+	border-radius: 10px;
 }
 
+
+div {
+	border: 1px solid black;
+	margin: 0;
+	padding: 5px;
+	padding-left: 30px;
+}
+
+
+#botones {
+	border: 0;
+	padding: 10px;
+	text-align: center;
+}
+
+#botones button {
+	padding: 10px;
+	background-color: #b4b4b2;
+	border-radius: 10px;
+}
+
+#botones button:hover {
+	color: white;
+	background-color: #4285f4;
+}
+
+#titulo {
+	color: white;
+	background-color: #4285f4;
+	border-radius: 8px 8px 0px 0px; 	
+}
+
+#subtitulo {
+	border-radius: 0px 0px 10px 10px; 	
+}

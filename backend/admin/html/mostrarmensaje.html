@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>AdminMR</title>
-  <link rel="stylesheet" href="../css/mensaje.css">
+  <link rel="stylesheet" href="../css/mostrarmensaje.css">
 </head>
 <body>
 	<div id="divmenu" class="divmenu">
@@ -13,15 +13,17 @@
   	    <div>
 	        <h3>Mensaje</h3>
         </div>
-        <ul>
-            <li>Asunto: ##asunto##</li>
-            <li>De: ##corresponsal##</li>
-            <li>Fecha: ##fecha## </li>
-            <li>Hora: ##hora##</li>
-            <li>Para: ##destinatario##</li>
-            <li>Animal asociado: nombre: ##animal## id: ##idanimal##</li>
-        </ul>
-        <div>##mensaje##</div>
+        <div id="correo">
+          <ul>
+              <li>Asunto: ##asunto##</li>
+              <li>De: ##corresponsal##</li>
+              <li>Fecha: ##fecha## </li>
+              <li>Hora: ##hora##</li>
+              <li>Para: ##destinatario##</li>
+              <li>Animal asociado: nombre: ##animal## id: ##idanimal##</li>
+          </ul><br>
+          <div>##mensaje##</div>
+        </div>
     </main>
 </body>
 </html>

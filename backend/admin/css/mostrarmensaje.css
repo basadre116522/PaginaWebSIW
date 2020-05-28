@@ -84,9 +84,9 @@ body {
 
 main {
 	display: inline-block;
-	float: left;
-	width: 70%;
 	padding: 20px;
+	width: 70%;
+	float: left;
 }
 
 form {
@@ -94,6 +94,13 @@ form {
 	padding-left: 50px;
 	border: 2px solid black;
 	border-radius: 10px;
+}
+
+#correo {
+	padding: 30px;
+	padding-left: 50px;
+	border: 2px solid black;
+	border-radius: 10px;	
 }
 
 h3 {
@@ -113,4 +120,3 @@ input {
 button {
 	margin: 20px;
 }
-

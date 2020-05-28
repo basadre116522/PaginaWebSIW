@@ -59,6 +59,24 @@ li {
 	display: block;
 }
 
+
+#botones {
+	border: 0;
+	padding: 10px;
+	text-align: center;
+}
+
+#botones button {
+	padding: 10px;
+	background-color: #b4b4b2;
+	border-radius: 10px;
+}
+
+#botones button:hover {
+	color: white;
+	background-color: #4285f4;
+}
+
 body {
 	margin-top: 0;
 	margin-left: 0;
@@ -72,6 +90,26 @@ main {
 }
 
 form {
-	padding: 20px;
+	padding: 30px;
+	padding-left: 50px;
+	border: 2px solid black;
+	border-radius: 10px;
 }
 
+h3 {
+	border: 2px solid black;
+	padding: 20px;
+	width: 40%;
+	border-radius: 10px;
+	color: white;
+	background-color: #4285f4;
+}
+
+input {
+	padding: 10px;
+	margin: 5px;
+}
+
+button {
+	margin: 20px;
+}

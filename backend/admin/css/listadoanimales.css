@@ -59,6 +59,24 @@ li {
 	display: block;
 }
 
+
+#botones {
+	border: 0;
+	padding: 10px;
+	text-align: center;
+}
+
+#botones button {
+	padding: 10px;
+	background-color: #b4b4b2;
+	border-radius: 10px;
+}
+
+#botones button:hover {
+	color: white;
+	background-color: #4285f4;
+}
+
 body {
 	margin-top: 0;
 	margin-left: 0;
