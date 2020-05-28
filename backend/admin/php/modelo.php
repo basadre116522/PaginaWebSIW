@@ -10,7 +10,7 @@
 
 		$usuario = $_POST["usuario"];
 		$password = md5($_POST["password"]);
-		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		$consulta = "select * from final_usuariosadmin where usuario = '$usuario'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				if ($password == $datos["password"]) {
@@ -32,7 +32,7 @@
 		$con = conexionbasedatos();
 		$usuario = $_SESSION["usuario"];
 		$password = $_SESSION["password"];
-		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		$consulta = "select * from final_usuariosadmin where usuario = '$usuario'";
 		if ($resultado = $con->query($consulta)) {
 			$_SESSION["usuario"] = null;
 			$_SESSION["password"] = null;
@@ -48,7 +48,7 @@
 		$usuario = $_SESSION["usuario"];
 		$password = $_SESSION["password"];
 
-		$consulta = "select * from usuariosadmin where usuario = '$usuario'";
+		$consulta = "select * from final_usuariosadmin where usuario = '$usuario'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				if ($password == $datos["password"]) {
@@ -78,7 +78,7 @@
 
 		$raza = $_POST["raza"];
 
-		$consulta = "select raza from razas where raza = '$raza'";
+		$consulta = "select raza from final_razas where raza = '$raza'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				return -2;
@@ -87,7 +87,7 @@
 			return -1;
 		}
 
-		$consulta = "insert into razas (raza) values ('$raza')";
+		$consulta = "insert into final_razas (raza) values ('$raza')";
 
 		if ($resultado = $con->query($consulta)) {
 			return 1;
@@ -106,7 +106,7 @@
 	function mlistadorazas() {
 		$con = conexionbasedatos();
 
-		$consulta = "select * from razas order by raza";
+		$consulta = "select * from final_razas order by raza";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -126,7 +126,7 @@
 
 		$idraza = $_GET["idraza"];
 		
-		$consulta = "select * from razas where idraza='$idraza'";
+		$consulta = "select * from final_razas where idraza='$idraza'";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -148,13 +148,13 @@
 		$idraza = $_POST["idraza"];	
 		$raza = $_POST["raza"];
 
-		$consulta = "select raza from razas where raza = '$raza' and idraza != '$idraza'";
+		$consulta = "select raza from final_razas where raza = '$raza' and idraza != '$idraza'";
 
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				return -2;
 			} else {
-				$consulta = "update razas set raza = '$raza' where idraza = '$idraza'";
+				$consulta = "update final_razas set raza = '$raza' where idraza = '$idraza'";
 			
 				if ($resultado = $con->query($consulta)) {
 					return 1;
@@ -173,7 +173,7 @@
 
 		$idraza = $_POST["idraza"];
 
-		$consulta = "select idanimal from animales where idraza = $idraza";
+		$consulta = "select idanimal from final_animales where idraza = $idraza";
 
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
@@ -181,7 +181,7 @@
 				return -2; 
 			} else {
 				// no tenemos animales con esa raza
-				$consulta = "delete from razas where idraza = $idraza";
+				$consulta = "delete from final_razas where idraza = $idraza";
 				if ($resultado = $con->query($consulta)) {
 					return 1;
 				} else {
@@ -215,7 +215,7 @@
 			// no se ha elegido la raza			
 			return -2;
 		} else {
-			$consulta = "insert into animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
+			$consulta = "insert into final_animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
 
 			if ($resultado = $con->query($consulta)) {
 				return $resultado;
@@ -229,7 +229,7 @@
 	function mlistadoanimales() {
 		$con = conexionbasedatos();
 
-		$consulta = "select idanimal, nombre, edad, genero, fechaentrada, descripcion, raza from animales join razas on animales.idraza = razas.idraza order by nombre";
+		$consulta = "select idanimal, nombre, edad, genero, fechaentrada, descripcion, raza from final_animales join final_razas on final_animales.idraza = final_razas.idraza order by nombre";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -240,7 +240,7 @@
 
 	function mlistadoimagenes($idanimal){
 		$con = conexionbasedatos();
-		$consulta = "select imagen from imagenes where idanimal = '$idanimal'";
+		$consulta = "select imagen from final_imagenes where idanimal = '$idanimal'";
 		if ($resultado = $con->query($consulta)) {
 			$rows = [];
 			$i=0;
@@ -260,7 +260,7 @@
 
 		$idanimal = $_GET["idanimal"];
 		
-		$consulta = "select * from animales where idanimal = $idanimal";
+		$consulta = "select * from final_animales where idanimal = $idanimal";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -292,10 +292,10 @@
 			//no se ha elegido raza
 			return -2;
 		} else {
-			$consulta = "update animales set nombre = '$nombre', edad = '$edad', genero = '$genero', fechaentrada = '$fechaentrada', descripcion = '$descripcion', idraza = $idraza where idanimal = $idanimal";
+			$consulta = "update final_animales set nombre = '$nombre', edad = '$edad', genero = '$genero', fechaentrada = '$fechaentrada', descripcion = '$descripcion', idraza = $idraza where idanimal = $idanimal";
 
 			if ($resultado = $con->query($consulta)) {
-				$consulta = "delete from imagenes where idanimal = '$idanimal' and imagen = '$imagen'";
+				$consulta = "delete from final_imagenes where idanimal = '$idanimal' and imagen = '$imagen'";
 				if ($resultado = $con->query($consulta)){
 					return 1;
 				} else {
@@ -313,7 +313,7 @@
 
 		$idanimal = $_GET["idanimal"];
 		
-		$consulta = "select idanimal, nombre, edad, genero, fechaentrada, descripcion, raza from animales join razas on animales.idraza = razas.idraza where idanimal='$idanimal'";
+		$consulta = "select idanimal, nombre, edad, genero, fechaentrada, descripcion, raza from final_animales join final_razas on final_animales.idraza = final_razas.idraza where idanimal='$idanimal'";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -328,7 +328,7 @@
 
 		$idanimal = $_POST["idanimal"];
 		
-		$consulta = "delete from animales where idanimal = $idanimal";
+		$consulta = "delete from final_animales where idanimal = $idanimal";
 	
 		if ($resultado = $con->query($consulta)) {
 			return 1;
@@ -344,7 +344,7 @@
 		$post = $_POST["post"];
 		$usuarioadmin = $_SESSION["usuario"];
 
-		$consulta = "select id from usuariosadmin where usuario='$usuarioadmin'";
+		$consulta = "select id from final_usuariosadmin where usuario='$usuarioadmin'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				$idusuarioadmin = $datos["id"];
@@ -353,7 +353,7 @@
 			return -1;
 		}
 
-		$consulta = "select titulo from posts where titulo = '$titulo'";
+		$consulta = "select titulo from final_posts where titulo = '$titulo'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				return -2;
@@ -362,7 +362,7 @@
 			return -1;
 		}
 
-		$consulta = "select post from posts where post = '$post'";
+		$consulta = "select post from final_posts where post = '$post'";
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				return -3;
@@ -371,7 +371,7 @@
 			return -1;
 		}
 
-		$consulta = "insert into posts (titulo, post, idadmin) values ('$titulo', '$post', '$idusuarioadmin')";
+		$consulta = "insert into final_posts (titulo, post, idadmin) values ('$titulo', '$post', '$idusuarioadmin')";
 		if ($resultado = $con->query($consulta)) {
 			return 1;
 		} else {
@@ -384,7 +384,7 @@
 	function mlistadoposts() {
 		$con = conexionbasedatos();
 
-		$consulta = "select * from posts order by idpost";
+		$consulta = "select * from final_posts order by idpost";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -406,7 +406,7 @@
 
 		$idpost = $_GET["idpost"];
 		
-		$consulta = "select * from posts where idpost='$idpost'";
+		$consulta = "select * from final_posts where idpost='$idpost'";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -429,20 +429,20 @@
 		$titulo = $_POST["titulo"];
 		$post = $_POST["post"];
 
-		$consulta = "select titulo, post from posts where titulo = '$titulo' and idpost != '$idpost'";
+		$consulta = "select titulo, post from final_posts where titulo = '$titulo' and idpost != '$idpost'";
 
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				return -2;
 			} else {
 
-				$consulta = "select titulo, post from posts where post = '$post' and idpost != '$idpost'";
+				$consulta = "select titulo, post from final_posts where post = '$post' and idpost != '$idpost'";
 
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						return -3;
 					} else {
-						$consulta = "update posts set titulo = '$titulo', post = '$post' where idpost = '$idpost'";
+						$consulta = "update final_posts set titulo = '$titulo', post = '$post' where idpost = '$idpost'";
 
 						if ($resultado = $con->query($consulta)) {
 							return 1;
@@ -465,11 +465,11 @@
 
 		$idpost = $_POST["idpost"];
 
-		$consulta = "delete from comentarios where idpost = '$idpost'";
+		$consulta = "delete from final_comentarios where idpost = '$idpost'";
 			
 		if ($resultado = $con->query($consulta)) {
 
-			$consulta = "delete from posts where idpost = '$idpost'";
+			$consulta = "delete from final_posts where idpost = '$idpost'";
 			
 			if ($resultado = $con->query($consulta)) {
 				return 1;
@@ -486,7 +486,7 @@
 	function mlistadocomentarios() {
 		$con = conexionbasedatos();
 
-		$consulta = "select * from comentarios";
+		$consulta = "select * from final_comentarios";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -502,7 +502,7 @@
 
 		$idcomentario = $_GET["idcomentario"];
 		
-		$consulta = "select * from comentarios where idcomentario='$idcomentario'";
+		$consulta = "select * from final_comentarios where idcomentario='$idcomentario'";
 
 		if ($resultado = $con->query($consulta)) {
 			return $resultado;
@@ -518,7 +518,7 @@
 
 		$idcomentario = $_POST["idcomentario"];
 		
-		$consulta = "delete from comentarios where idcomentario = $idcomentario";
+		$consulta = "delete from final_comentarios where idcomentario = $idcomentario";
 	
 		if ($resultado = $con->query($consulta)) {
 			return 1;
@@ -540,17 +540,17 @@
 		$con = conexionbasedatos();
 
 		$usuario = $_SESSION["usuario"];
-		$consulta = "select idmensaje, animales.idanimal, usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from mensajes
-						join usuarios on mensajes.idusuario = usuarios.id 
-						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
-						left join animales on animales.idanimal = mensajes.idanimal
-						where usuariosadmin.usuario = '$usuario' and mensajes.recibido = 1
+		$consulta = "select idmensaje, final_animales.idanimal, final_usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from final_mensajes
+						join final_usuarios on final_mensajes.idusuario = final_usuarios.id 
+						join final_usuariosadmin on final_mensajes.idadmin = final_usuariosadmin.id 
+						left join final_animales on final_animales.idanimal = final_mensajes.idanimal
+						where final_usuariosadmin.usuario = '$usuario' and final_mensajes.recibido = 1
 						union
-						select idmensaje, animales.idanimal, usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from mensajes
-						join usuarios on mensajes.idusuario = usuarios.id 
-						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
-						left join animales on animales.idanimal = mensajes.idanimal
-						where mensajes.idadmin = 100 and mensajes.recibido = 1
+						select idmensaje, final_animales.idanimal, final_usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from final_mensajes
+						join final_usuarios on final_mensajes.idusuario = final_usuarios.id 
+						join final_usuariosadmin on final_mensajes.idadmin = final_usuariosadmin.id 
+						left join final_animales on final_animales.idanimal = final_mensajes.idanimal
+						where final_mensajes.idadmin = 100 and final_mensajes.recibido = 1
 						order by fecha, hora desc";
 						
 		if ($resultado = $con->query($consulta)) {
@@ -570,11 +570,11 @@
 		$con = conexionbasedatos();
 
 		$usuario = $_SESSION["usuario"];
-		$consulta = "select idmensaje, animales.idanimal, usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from mensajes
-						join usuarios on mensajes.idusuario = usuarios.id 
-						join usuariosadmin on mensajes.idadmin = usuariosadmin.id 
-						left join animales on animales.idanimal = mensajes.idanimal
-						where usuariosadmin.usuario = '$usuario' and mensajes.recibido = 0
+		$consulta = "select idmensaje, final_animales.idanimal, final_usuarios.usuario, nombre, mensaje, idusuario, fecha, hora, asunto from final_mensajes
+						join final_usuarios on final_mensajes.idusuario = final_usuarios.id 
+						join final_usuariosadmin on final_mensajes.idadmin = final_usuariosadmin.id 
+						left join final_animales on final_animales.idanimal = final_mensajes.idanimal
+						where final_usuariosadmin.usuario = '$usuario' and final_mensajes.recibido = 0
 						order by fecha, hora desc";
 
 		if ($resultado = $con->query($consulta)) {
@@ -595,13 +595,13 @@
 		setlocale(LC_ALL,"es_ES");
 
 		$usuarioadmin = $_SESSION["usuario"];
-		$consulta = "select * from usuariosadmin where usuario ='$usuarioadmin'";
+		$consulta = "select * from final_usuariosadmin where usuario ='$usuarioadmin'";
 
 		if ($resultado = $con->query($consulta)) {
 			if ($datos = $resultado->fetch_assoc()) {
 				$idadmin = $datos["id"];
 				$destinatario = $_POST["destinatario"];
-				$consulta = "select * from usuarios where usuario ='$destinatario'";
+				$consulta = "select * from final_usuarios where usuario ='$destinatario'";
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						$idusuario = $datos["id"];
@@ -609,7 +609,7 @@
 						$asunto = $_POST["asunto"];
 						$hora = date('H:i:s');
 						$fecha = date('Y-m-d');
-						$consulta = "insert into mensajes (idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
+						$consulta = "insert into final_mensajes (idusuario, mensaje, idadmin, asunto, fecha, hora, recibido )
 						VALUES ('$idusuario', '$mensaje', '$idadmin', '$asunto', '$fecha', '$hora', '0');";
 						if ($resultado = $con->query($consulta)) {
 							return 1;
@@ -643,9 +643,9 @@
 
 		$idmensaje = $_GET["idmensaje"];
 		
-		$consulta = "select animales.idanimal, usuarios.usuario, nombre, mensaje, fecha, hora, asunto from mensajes
-							join usuarios on mensajes.idusuario = usuarios.id
-							left join animales on animales.idanimal = mensajes.idanimal
+		$consulta = "select final_animales.idanimal, final_usuarios.usuario, nombre, mensaje, fecha, hora, asunto from final_mensajes
+							join final_usuarios on final_mensajes.idusuario = final_usuarios.id
+							left join final_animales on final_animales.idanimal = final_mensajes.idanimal
 							where idmensaje = '$idmensaje'";
 
 		if ($resultado = $con->query($consulta)) {
@@ -671,13 +671,13 @@
 			while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
 				$raza = $datos[0];
 
-				$consulta = "select raza from razas where raza = '$raza'";
+				$consulta = "select raza from final_razas where raza = '$raza'";
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						echo "error: la raza $raza ya existe <br/>";
 					}
 					else {
-						$consulta = "insert into razas (raza) values ('$raza')";
+						$consulta = "insert into final_razas (raza) values ('$raza')";
 		
 						if ($resultado != $con->query($consulta)) {
 							return -1;
@@ -714,14 +714,14 @@
 				$descripcion = $datos[3];
 				$fechaentrada = $datos[4];
 				$raza = $datos[5];
-				$consulta = "select idraza from razas where raza = '$raza'";
+				$consulta = "select idraza from final_razas where raza = '$raza'";
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						$idraza = $datos["idraza"];
 					}
 				}
 				if (isset($idraza)) {
-					$consulta = "insert into animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
+					$consulta = "insert into final_animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
 		
 					if ($resultado = $con->query($consulta)) {
 						return $resultado;
@@ -741,7 +741,7 @@
 
 		//generamos la consulta
 		
-		$consulta = "select * from animales";
+		$consulta = "select * from final_animales";
 		
 			if($result = $con->query($consulta)){
 				$data = array(); //creamos un array
@@ -771,7 +771,7 @@
 
 		//generamos la consulta
 		
-		$consulta = "select * from razas";
+		$consulta = "select * from final_razas";
 		
 			if($result = $con->query($consulta)){
 				$data = array(); //creamos un array
@@ -801,7 +801,7 @@
 
 		//generamos la consulta
 		
-		$consulta = "select * from posts";
+		$consulta = "select * from final_posts";
 		
 			if($result = $con->query($consulta)){
 				$data = array(); //creamos un array
@@ -833,7 +833,7 @@
 
 		//generamos la consulta
 		
-		$consulta = "select * from comentarios";
+		$consulta = "select * from final_comentarios";
 		
 			if($result = $con->query($consulta)){
 				$data = array(); //creamos un array
