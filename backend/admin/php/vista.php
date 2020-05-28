@@ -249,7 +249,7 @@
 				$aux = str_replace("##raza##", $datos["raza"], $aux);
 				$imagenes_array = mlistadoimagenes($datos["idanimal"]);
 				$i = 0;
-				$dir= 'http://localhost/siw/PaginaWebSIW-master/backend/admin/imagenes';
+				$dir= '../imagenes';
 				foreach($imagenes_array as $img){
 					$target_path = $dir.'/'.$img;
 					$imagenes_array[$i] = "<a href='".$target_path."'>".$img."</a>";
