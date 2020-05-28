@@ -129,17 +129,29 @@ th {
 td{
 	width: 50%;
 	padding: 5px;
+	border-bottom: solid 1px blanchedalmond;
 
 }
 
 .menumensajes{
 	background-color: #809629;
-	text-align: left;
 	color: black;
-	width: 20%;
-	display: block;
+	display: inline-block;
+	float: left;
 	padding: 5px;
-	border: 0;
 	margin: 0;
-	margin-left: -39px;
+	width: 30%;
+	font-family: 'Crimes Times Roman';
+	list-style: none;
+	text-decoration: none;
+}
+li.menumensajes a{
+	text-decoration: none;
+	text-align: center;
+	outline: none ;
+	color: black;
+
+}
+li.menumensajes:hover{
+	background-color: #a2b84b;
 }
