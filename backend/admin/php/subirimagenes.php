@@ -15,7 +15,7 @@
 	    if (move_uploaded_file($tmp_name, $ruta)) {
     	echo "Subida OK";
     	// INSERTAMOS LA IMAGEN EN LA BD [OK]
-		$consulta = "insert into imagenes (idanimal, imagen) values ('$idanimal', '$name_bd')";
+		$consulta = "insert into final_imagenes (idanimal, imagen) values ('$idanimal', '$name_bd')";
 		if ($con->query($consulta)) {
 			echo "Consulta OK";
 			// Miniatura de tamaño pequeño
