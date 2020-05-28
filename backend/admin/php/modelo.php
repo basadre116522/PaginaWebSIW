@@ -713,7 +713,6 @@
 				$fechaentrada = $datos[4];
 				$raza = $datos[5];
 				$consulta = "select idraza from final_razas where raza = '$raza'";
-				echo $consulta;
 				if ($resultado = $con->query($consulta)) {
 					if ($datos = $resultado->fetch_assoc()) {
 						$idraza = $datos["idraza"];
@@ -721,7 +720,6 @@
 				}
 				if (isset($idraza)) {
 					$consulta = "insert into final_animales (nombre, edad, genero, fechaentrada, descripcion, idraza) value ('$nombre','$edad','$genero','$fechaentrada','$descripcion','$idraza')";
-					echo $consulta;
 					if ($resultado = $con->query($consulta)) {
 					} else {
 						return -1;
