@@ -18,6 +18,16 @@ h1 {
 	font-family: Crimes Times Roman;
 }
 
+h2 {
+	padding: 20px;
+	clear: both;
+	font-family: Crimes Times Roman;
+}
+
+h3 {
+	font-family: Crimes Times Roman;
+}
+
 #botones {
 	display: inline-block;
 	float: right;
@@ -144,6 +154,23 @@ aside {
 	background-color: rgba(255,255,255,0.3);
 }
 
+#datos {
+	display: inline-block;
+	padding: 30px;
+	margin: 20px;
+	margin-left: 20%;
+	padding-left: 50px;
+	border: 1px solid black;
+	width: 55%;
+	background-color: rgba(255,255,255,0.3);
+}
 
+.galeria {
+	text-align: center;
+}
 
+#cita {
+	text-align: center;
+	margin-bottom: 100px;
+}
 
