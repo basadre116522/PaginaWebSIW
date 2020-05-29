@@ -23,7 +23,7 @@
             var newstr = str.replace(/_thumbM/, "_thumbG");
             document.getElementById('imagenGrande1').src = newstr;
             // Resto de casos [pequeñas] (con un for)
-            for (i = 2; i < 7; i++) {
+            for (i = 2; i < 5; i++) {
                 str = document.getElementById('imagen' + i).src;
                 newstr = str.replace(/_thumbP/, "_thumbG");
                 document.getElementById('imagenGrande' + i).src = newstr;
@@ -124,7 +124,7 @@
         <div name="galeriaNoNav" id="galeriaNoNav">
             <div class="principal">
                 <!-- Cuando pinchamos la imagen principal mediana, se muestra una capa con la foto grande -->
-                <img src="##IMAGEN1##" id="imagenPrincipal" onclick="navegarGaleria()">
+                <img src="##IMAGEN1##" id="imagenPrincipal"">
             </div>
             <!-- Las imágenes 2-4 siempre van a ser de tamaño pequeño -->
             <!-- Cuando pinchamos sobre las imagenes pequeñas, se mostraran en la zona de la imagen principal mediana -->
