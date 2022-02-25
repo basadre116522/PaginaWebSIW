@@ -1,2 +1,1 @@
-aquí va todo lo del administrador
-solo he hecho este fichero para que mostrara la carpeta de backend jeje
+parte del administrador
